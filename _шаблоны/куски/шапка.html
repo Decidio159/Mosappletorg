@@ -1,0 +1,31 @@
+<header class="header">
+  <div class="container header__row">
+    <a class="logo logo--img" href="index.html" aria-label="{{название}} — на главную">
+      <img src="assets/logo-black.webp" alt="{{название}}" width="640" height="281" />
+    </a>
+
+    <nav class="nav">
+      <a href="index.html">Главная</a>
+      <a href="каталог.html">Каталог</a>
+      <a href="trade-in.html">Trade-in</a>
+      <a href="доставка.html">Доставка</a>
+      <a href="контакты.html">Контакты</a>
+    </nav>
+
+    <a class="header__phone" href="tel:{{телефон_ссылкой}}">{{телефон}}</a>
+
+    <a class="cart-btn btn btn--ghost compare-btn" href="сравнение.html" aria-label="Сравнение товаров">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+      <span class="btn__text">Сравнение</span> <span class="cart-btn__count" data-compare-count style="display: none">0</span>
+    </a>
+
+    <button class="cart-btn btn btn--ghost" data-cart-open>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 10a4 4 0 0 1-8 0"/><path d="M3.103 6.034h17.794"/><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"/></svg>
+      <span class="btn__text">Корзина</span> <span class="cart-btn__count" data-cart-count style="display: none">0</span>
+    </button>
+
+    <button class="burger" aria-label="Открыть меню">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+</header>

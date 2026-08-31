@@ -1,0 +1,277 @@
+/* =========================================================
+   ИНТЕРФЕЙСНЫЕ КОМПОНЕНТЫ — в духе shadcn/ui, но на чистом CSS.
+   Подключать после base.css. Ни одной библиотеки.
+
+   Токены ниже повторяют логику shadcn: muted, ring, card,
+   destructive. Значения берутся из палитры темы ниши, поэтому
+   компоненты автоматически перекрашиваются вместе с каркасом.
+   ========================================================= */
+
+:root {
+  --muted:      var(--surface);
+  --muted-fg:   var(--text-muted);
+  --card-bg:    var(--bg-elevated);
+  --ring:       color-mix(in srgb, var(--accent) 45%, transparent);
+  --destructive: var(--danger, #c0392b);
+  --radius-ui:  10px;
+}
+
+/* ---------- Тёмная тема: переключается кнопкой, помнится в браузере ---------- */
+[data-theme="dark"] {
+  --bg:            #0b0c0f;
+  --bg-soft:       #111318;
+  --bg-elevated:   #14161c;
+  --surface:       #1b1e26;
+  --border:        rgba(255, 255, 255, 0.10);
+  --border-strong: rgba(255, 255, 255, 0.20);
+  --text:          #f2f4f8;
+  --text-muted:    #a6adbb;
+  --text-dim:      #7c8494;
+  --shadow:        0 20px 50px -22px rgba(0, 0, 0, 0.8);
+  --shadow-sm:     0 6px 20px -10px rgba(0, 0, 0, 0.7);
+}
+
+/* ---------- Кнопка-иконка и переключатель темы ---------- */
+.icon-btn {
+  width: 44px; height: 44px; border-radius: var(--radius-ui);
+  display: inline-grid; place-items: center;
+  border: 1px solid var(--border); color: var(--text-muted);
+  transition: background-color .2s, color .2s, border-color .2s;
+}
+.icon-btn:hover { background: var(--muted); color: var(--text); }
+.icon-btn svg { width: 20px; height: 20px; }
+[data-theme="dark"] .theme-toggle .sun { display: block; }
+[data-theme="dark"] .theme-toggle .moon { display: none; }
+.theme-toggle .sun { display: none; }
+.theme-toggle .moon { display: block; }
+
+/* ---------- Табы ---------- */
+.tabs__list {
+  display: inline-flex; gap: 0.25rem; padding: 0.25rem;
+  background: var(--muted); border-radius: var(--radius-ui);
+}
+.tabs__btn {
+  padding: 0.55rem 1rem; min-height: 40px; border-radius: calc(var(--radius-ui) - 3px);
+  font-size: 0.94rem; font-weight: 600; color: var(--muted-fg);
+  transition: background-color .2s, color .2s;
+}
+.tabs__btn:hover { color: var(--text); }
+.tabs__btn.is-active { background: var(--card-bg); color: var(--text); box-shadow: var(--shadow-sm); }
+.tabs__panel { display: none; padding-top: 1.2rem; }
+.tabs__panel.is-active { display: block; }
+
+/* ---------- Карточка с шапкой и подвалом ---------- */
+.ui-card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius-ui); overflow: hidden;
+}
+.ui-card__head { padding: 1.2rem 1.4rem 0.8rem; }
+.ui-card__title { font-family: var(--font-head); font-size: 1.1rem; }
+.ui-card__desc { color: var(--muted-fg); font-size: 0.94rem; margin-top: 0.2rem; }
+.ui-card__body { padding: 0.6rem 1.4rem 1.2rem; }
+.ui-card__foot { padding: 1rem 1.4rem; border-top: 1px solid var(--border); background: color-mix(in srgb, var(--muted) 55%, transparent); display: flex; gap: 0.6rem; align-items: center; }
+
+/* ---------- Уведомление в тексте (alert) ---------- */
+.alert {
+  display: grid; grid-template-columns: 22px 1fr; gap: 0.8rem;
+  padding: 1rem 1.2rem; border: 1px solid var(--border);
+  border-radius: var(--radius-ui); background: var(--card-bg);
+}
+.alert svg { width: 22px; height: 22px; color: var(--accent); margin-top: 2px; }
+.alert b { display: block; font-family: var(--font-head); margin-bottom: 0.2rem; }
+.alert p { color: var(--muted-fg); font-size: 0.94rem; }
+.alert--danger { border-color: color-mix(in srgb, var(--destructive) 40%, var(--border)); }
+.alert--danger svg { color: var(--destructive); }
+
+/* ---------- Всплывающие уведомления (toast) ---------- */
+.toasts {
+  position: fixed; right: 1rem; bottom: 1rem; z-index: 300;
+  display: flex; flex-direction: column; gap: 0.6rem; width: min(360px, calc(100vw - 2rem));
+}
+.toast {
+  display: grid; grid-template-columns: 20px 1fr auto; gap: 0.7rem; align-items: start;
+  padding: 0.9rem 1rem; border-radius: var(--radius-ui);
+  background: var(--card-bg); border: 1px solid var(--border); box-shadow: var(--shadow);
+  transform: translateY(12px); opacity: 0; transition: transform .28s var(--ease), opacity .28s var(--ease);
+}
+.toast.is-in { transform: none; opacity: 1; }
+.toast svg { width: 20px; height: 20px; color: var(--accent); margin-top: 2px; }
+.toast--ok svg { color: var(--ok, #1e8e4e); }
+.toast--err svg { color: var(--destructive); }
+.toast b { display: block; font-size: 0.96rem; }
+.toast span { color: var(--muted-fg); font-size: 0.9rem; }
+.toast button { color: var(--text-dim); width: 24px; height: 24px; }
+@media (max-width: 900px) { .toasts { bottom: 5.6rem; } }
+
+/* ---------- Модальное окно (dialog) ---------- */
+.dialog { position: fixed; inset: 0; z-index: 250; display: none; place-items: center; padding: 1rem; }
+.dialog.is-open { display: grid; }
+.dialog__backdrop { position: absolute; inset: 0; background: rgba(8, 10, 14, .55); backdrop-filter: blur(2px); }
+.dialog__box {
+  position: relative; width: min(520px, 100%); background: var(--card-bg);
+  border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: clamp(1.3rem, 3vw, 2rem);
+  animation: dialog-in .25s var(--ease);
+}
+@keyframes dialog-in { from { opacity: 0; transform: translateY(12px) scale(.98); } }
+.dialog__close { position: absolute; top: 0.7rem; right: 0.7rem; }
+
+/* ---------- Подсказка (tooltip) ---------- */
+.tip { position: relative; display: inline-flex; }
+.tip::after {
+  content: attr(data-tip);
+  position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translate(-50%, 4px);
+  padding: 0.45rem 0.7rem; border-radius: 8px; white-space: nowrap;
+  background: var(--text); color: var(--bg); font-size: 0.84rem; font-weight: 500;
+  opacity: 0; pointer-events: none; transition: opacity .18s, transform .18s;
+}
+.tip:hover::after, .tip:focus-visible::after { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- Переключатель (switch) ---------- */
+.switch { display: inline-flex; align-items: center; gap: 0.7rem; cursor: pointer; }
+.switch input { position: absolute; opacity: 0; width: 0; height: 0; }
+.switch__track {
+  width: 46px; height: 26px; border-radius: 99px; background: var(--border-strong);
+  position: relative; transition: background-color .22s;
+}
+.switch__track::after {
+  content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px;
+  border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.3);
+  transition: transform .22s var(--ease);
+}
+.switch input:checked + .switch__track { background: var(--accent); }
+.switch input:checked + .switch__track::after { transform: translateX(20px); }
+.switch input:focus-visible + .switch__track { outline: 3px solid var(--ring); outline-offset: 2px; }
+
+/* ---------- Прогресс ---------- */
+.progress { height: 8px; border-radius: 99px; background: var(--muted); overflow: hidden; }
+.progress__bar { height: 100%; width: 0; border-radius: 99px; background: var(--gradient); transition: width .5s var(--ease); }
+
+/* Полоса прочтения страницы */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 100;
+  width: var(--scrolled, 0%); background: var(--gradient);
+}
+
+/* ---------- Скелетон ---------- */
+.skeleton {
+  position: relative; overflow: hidden; border-radius: var(--radius-ui);
+  background: var(--muted); min-height: 16px;
+}
+.skeleton::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--text) 8%, transparent), transparent);
+  animation: shimmer 1.4s infinite;
+}
+@keyframes shimmer { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+.skeleton--text { height: 12px; margin-bottom: 0.5rem; }
+.skeleton--title { height: 20px; width: 60%; margin-bottom: 0.9rem; }
+.skeleton--img { aspect-ratio: 16/10; }
+
+/* ---------- Спиннер ---------- */
+.spinner {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 2px solid var(--border-strong); border-top-color: var(--accent);
+  animation: spin .7s linear infinite; display: inline-block;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- Аватары ---------- */
+.avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; background: var(--muted); display: grid; place-items: center; font-weight: 700; font-size: 0.9rem; color: var(--muted-fg); }
+.avatars { display: flex; }
+.avatars .avatar { border: 2px solid var(--card-bg); margin-left: -10px; }
+.avatars .avatar:first-child { margin-left: 0; }
+
+/* ---------- Хлебные крошки и пагинация ---------- */
+.crumbs { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; color: var(--muted-fg); font-size: 0.92rem; }
+.crumbs a:hover { color: var(--text); }
+.crumbs svg { width: 14px; height: 14px; opacity: .6; }
+.pager { display: flex; gap: 0.35rem; align-items: center; }
+.pager button, .pager a { min-width: 40px; height: 40px; padding-inline: 0.7rem; border-radius: var(--radius-ui); display: grid; place-items: center; border: 1px solid transparent; color: var(--muted-fg); font-weight: 600; }
+.pager .is-active { border-color: var(--border); background: var(--card-bg); color: var(--text); }
+.pager button:hover, .pager a:hover { background: var(--muted); color: var(--text); }
+
+/* ---------- Клавиша и разделитель ---------- */
+.kbd { font-family: ui-monospace, Consolas, monospace; font-size: 0.8rem; padding: 0.15rem 0.45rem; border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 6px; background: var(--muted); }
+.separator { height: 1px; background: var(--border); margin-block: 1.5rem; border: 0; }
+
+/* ---------- Пустое состояние ---------- */
+.empty { text-align: center; padding: clamp(2rem, 6vw, 4rem) 1rem; border: 1px dashed var(--border-strong); border-radius: var(--radius); }
+.empty svg { width: 44px; height: 44px; color: var(--text-dim); margin: 0 auto 1rem; }
+.empty p { color: var(--muted-fg); max-width: 44ch; margin: 0.4rem auto 1.2rem; }
+
+/* ---------- Таблица ---------- */
+.table { width: 100%; border-collapse: collapse; font-size: 0.96rem; }
+.table th { text-align: left; font-size: 0.8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--text-dim); padding: 0.7rem 0.9rem; border-bottom: 1px solid var(--border); }
+.table td { padding: 0.85rem 0.9rem; border-bottom: 1px solid var(--border); }
+.table tbody tr:hover { background: var(--muted); }
+
+/* =========================================================
+   КРАСИВОСТИ
+   ========================================================= */
+
+/* Подсветка за курсором */
+.spotlight { position: relative; overflow: hidden; }
+.spotlight::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%);
+  opacity: 0; transition: opacity .3s;
+}
+.spotlight:hover::before { opacity: 1; }
+
+/* Градиентная рамка */
+.gradient-border {
+  position: relative; border-radius: var(--radius); background: var(--card-bg);
+  border: 1px solid transparent;
+  background-image: linear-gradient(var(--card-bg), var(--card-bg)), var(--gradient);
+  background-origin: border-box; background-clip: padding-box, border-box;
+}
+
+/* Блик на кнопке */
+.shine { position: relative; overflow: hidden; }
+.shine::after {
+  content: ""; position: absolute; top: 0; bottom: 0; width: 40%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.35), transparent);
+  transform: translateX(-160%); animation: shine 3.6s ease-in-out infinite;
+}
+@keyframes shine { 40%, 100% { transform: translateX(320%); } }
+
+/* Стекло */
+.glass {
+  background: color-mix(in srgb, var(--card-bg) 62%, transparent);
+  backdrop-filter: blur(14px);
+  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  border-radius: var(--radius);
+}
+
+/* Сетка с растворяющимися краями — как на первом экране shadcn */
+.grid-fade { position: relative; isolation: isolate; }
+.grid-fade::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background-image:
+    linear-gradient(to right, currentColor 1px, transparent 1px),
+    linear-gradient(to bottom, currentColor 1px, transparent 1px);
+  background-size: 42px 42px; opacity: .09;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
+          mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
+}
+
+/* Затухание краёв у горизонтальной прокрутки */
+.scroll-fade {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 24px, #000 calc(100% - 24px), transparent);
+          mask-image: linear-gradient(to right, transparent, #000 24px, #000 calc(100% - 24px), transparent);
+}
+
+/* Текст с переливающимся градиентом */
+.gradient-animate {
+  background: linear-gradient(100deg, var(--accent), var(--accent-2), var(--accent));
+  background-size: 220% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: gradient-move 6s linear infinite;
+}
+@keyframes gradient-move { to { background-position: -220% 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .shine::after, .gradient-animate, .skeleton::after { animation: none; }
+  .spinner { animation-duration: 2s; }
+}

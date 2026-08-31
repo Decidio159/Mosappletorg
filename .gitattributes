@@ -1,0 +1,8 @@
+# Единые переводы строк: макет правится и на Windows, и на Linux
+* text=auto eol=lf
+
+# Картинки и шрифты — бинарные, git их не трогает
+*.webp binary
+*.jpg  binary
+*.png  binary
+*.woff2 binary

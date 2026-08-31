@@ -1,0 +1,243 @@
+/* =========================================================
+   КОМПОНЕНТЫ И ЭФФЕКТЫ, ВТОРОЙ ПАКЕТ.
+   Подключать после ui.css. Токены и палитра — оттуда же.
+   ========================================================= */
+
+/* ---------- Выпадающее меню ---------- */
+.dropdown { position: relative; display: inline-flex; }
+.dropdown__menu {
+  position: absolute; top: calc(100% + 8px); left: 0; z-index: 80; min-width: 220px;
+  background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius-ui);
+  box-shadow: var(--shadow); padding: 0.35rem;
+  opacity: 0; visibility: hidden; transform: translateY(-6px);
+  transition: opacity .18s, transform .18s, visibility .18s;
+}
+.dropdown.is-open .dropdown__menu { opacity: 1; visibility: visible; transform: none; }
+.dropdown__menu a, .dropdown__menu button {
+  display: flex; align-items: center; gap: 0.6rem; width: 100%;
+  padding: 0.6rem 0.7rem; border-radius: 8px; color: var(--text-muted); font-size: 0.95rem; text-align: left;
+}
+.dropdown__menu a:hover, .dropdown__menu button:hover { background: var(--muted); color: var(--text); }
+.dropdown__menu svg { width: 18px; height: 18px; }
+.dropdown__menu hr { border: 0; border-top: 1px solid var(--border); margin: 0.35rem 0; }
+.dropdown__menu--right { left: auto; right: 0; }
+
+/* ---------- Карточка при наведении ---------- */
+.hovercard { position: relative; display: inline-flex; }
+.hovercard__panel {
+  position: absolute; bottom: calc(100% + 10px); left: 50%; transform: translate(-50%, 6px);
+  width: 280px; z-index: 90; padding: 1rem;
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius-ui); box-shadow: var(--shadow);
+  opacity: 0; visibility: hidden; transition: opacity .2s, transform .2s, visibility .2s;
+}
+.hovercard:hover .hovercard__panel,
+.hovercard:focus-within .hovercard__panel { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+
+/* ---------- Шторка снизу ---------- */
+.drawer { position: fixed; inset: 0; z-index: 240; display: none; }
+.drawer.is-open { display: block; }
+.drawer__backdrop { position: absolute; inset: 0; background: rgba(8,10,14,.5); }
+.drawer__box {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  background: var(--card-bg); border-radius: var(--radius) var(--radius) 0 0;
+  padding: 1.5rem var(--gutter) calc(1.5rem + env(safe-area-inset-bottom));
+  box-shadow: var(--shadow); animation: drawer-in .3s var(--ease);
+}
+@keyframes drawer-in { from { transform: translateY(100%); } }
+.drawer__grip { width: 44px; height: 4px; border-radius: 99px; background: var(--border-strong); margin: -0.5rem auto 1.2rem; }
+
+/* ---------- Просмотр фото ---------- */
+.lightbox { position: fixed; inset: 0; z-index: 260; display: none; place-items: center; background: rgba(6,8,12,.92); padding: 1rem; }
+.lightbox.is-open { display: grid; }
+.lightbox img { max-width: min(1100px, 94vw); max-height: 86vh; border-radius: var(--radius-ui); animation: dialog-in .25s var(--ease); }
+.lightbox__cap { position: absolute; bottom: 1.2rem; left: 0; right: 0; text-align: center; color: rgba(255,255,255,.85); font-size: 0.94rem; }
+.lightbox__nav, .lightbox__close {
+  position: absolute; width: 52px; height: 52px; border-radius: 50%;
+  display: grid; place-items: center; background: rgba(255,255,255,.12); color: #fff;
+}
+.lightbox__nav { top: 50%; transform: translateY(-50%); }
+.lightbox__nav:hover, .lightbox__close:hover { background: rgba(255,255,255,.24); }
+.lightbox__nav--prev { left: 1rem; }
+.lightbox__nav--next { right: 1rem; }
+.lightbox__close { top: 1rem; right: 1rem; width: 44px; height: 44px; }
+.lightbox svg { width: 24px; height: 24px; }
+
+/* ---------- Поиск по странице ---------- */
+.command { position: fixed; inset: 0; z-index: 270; display: none; padding: 12vh 1rem 1rem; }
+.command.is-open { display: block; }
+.command__backdrop { position: absolute; inset: 0; background: rgba(8,10,14,.55); backdrop-filter: blur(3px); }
+.command__box {
+  position: relative; width: min(560px, 100%); margin: 0 auto;
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden;
+  animation: dialog-in .2s var(--ease);
+}
+.command__input { width: 100%; border: 0; border-bottom: 1px solid var(--border); padding: 1rem 1.2rem; font-size: 16px; background: transparent; color: var(--text); }
+.command__input:focus { outline: none; }
+.command__list { max-height: 320px; overflow-y: auto; padding: 0.4rem; }
+.command__list a { display: flex; align-items: center; gap: 0.7rem; padding: 0.7rem 0.8rem; border-radius: 8px; color: var(--text-muted); }
+.command__list a.is-active, .command__list a:hover { background: var(--muted); color: var(--text); }
+.command__empty { padding: 1.5rem; text-align: center; color: var(--text-dim); }
+
+/* ---------- Шаги формы ---------- */
+.stepper { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.5rem; }
+.stepper__dot { display: flex; align-items: center; gap: 0.5rem; color: var(--text-dim); font-size: 0.92rem; font-weight: 600; }
+.stepper__dot i { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; border: 1.5px solid var(--border-strong); font-style: normal; font-size: 0.85rem; }
+.stepper__dot.is-active { color: var(--text); }
+.stepper__dot.is-active i { background: var(--gradient); color: var(--on-accent); border-color: transparent; }
+.stepper__dot.is-done i { background: var(--muted); color: var(--accent); border-color: transparent; }
+.stepper__line { flex: 1; height: 1px; background: var(--border); }
+.step-panel { display: none; }
+.step-panel.is-active { display: block; }
+
+/* ---------- Лента истории ---------- */
+.timeline { position: relative; padding-left: 2rem; }
+.timeline::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: var(--border); }
+.timeline__item { position: relative; padding-bottom: 1.6rem; }
+.timeline__item::before { content: ""; position: absolute; left: -1.7rem; top: 6px; width: 16px; height: 16px; border-radius: 50%; background: var(--card-bg); border: 3px solid var(--accent); }
+.timeline__date { font-size: 0.85rem; color: var(--text-dim); }
+.timeline__item b { display: block; font-family: var(--font-head); margin: 0.15rem 0 0.25rem; }
+.timeline__item p { color: var(--muted-fg); font-size: 0.95rem; }
+
+/* ---------- Оценка звёздами ---------- */
+.rating { display: inline-flex; gap: 0.15rem; align-items: center; }
+.rating button, .rating span.star { width: 26px; height: 26px; color: var(--border-strong); }
+.rating svg { width: 24px; height: 24px; }
+.rating .is-on { color: #f5b301; }
+
+/* ---------- Сегменты ---------- */
+.segments { display: inline-flex; padding: 0.25rem; gap: 0.2rem; background: var(--muted); border-radius: 99px; }
+.segments button { padding: 0.5rem 1.1rem; min-height: 40px; border-radius: 99px; font-weight: 600; font-size: 0.94rem; color: var(--muted-fg); }
+.segments button.is-active { background: var(--card-bg); color: var(--text); box-shadow: var(--shadow-sm); }
+
+/* ---------- Ползунок значения ---------- */
+.range__head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.4rem; }
+.range__val { font-family: var(--font-head); font-weight: 700; }
+.range input[type="range"] { width: 100%; accent-color: var(--accent); height: 40px; }
+
+/* ---------- Столбчатый график ---------- */
+.chart { display: flex; align-items: flex-end; gap: 0.5rem; height: 170px; }
+.chart__bar { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 0.4rem; height: 100%; }
+.chart__bar i { display: block; width: 100%; border-radius: 6px 6px 0 0; background: var(--gradient); height: 0; transition: height .7s var(--ease); }
+.chart__bar span { font-size: 0.78rem; color: var(--text-dim); }
+
+/* ---------- Кнопка «скопировать» ---------- */
+.copy { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.55rem 0.85rem; min-height: 44px; border: 1px solid var(--border); border-radius: var(--radius-ui); font-size: 0.94rem; }
+.copy:hover { background: var(--muted); }
+.copy svg { width: 16px; height: 16px; }
+.copy.is-done { border-color: var(--ok, #1e8e4e); color: var(--ok, #1e8e4e); }
+
+/* ---------- Наверх ---------- */
+.to-top {
+  position: fixed; right: 1rem; bottom: 1rem; z-index: 55;
+  width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--card-bg); border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+  opacity: 0; visibility: hidden; transform: translateY(10px); transition: opacity .25s, transform .25s, visibility .25s;
+}
+.to-top.is-in { opacity: 1; visibility: visible; transform: none; }
+.to-top svg { width: 22px; height: 22px; }
+@media (max-width: 900px) { .to-top { bottom: 5.6rem; right: 0.8rem; } }
+
+/* ---------- Раскрывающийся блок ---------- */
+.collapsible__body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s var(--ease); }
+.collapsible.is-open .collapsible__body { grid-template-rows: 1fr; }
+.collapsible__body > div { overflow: hidden; }
+
+/* ---------- Календарь ---------- */
+.calendar { width: min(340px, 100%); }
+.calendar__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.8rem; }
+.calendar__title { font-family: var(--font-head); font-weight: 700; }
+.calendar__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.calendar__grid > span { text-align: center; font-size: 0.75rem; color: var(--text-dim); padding-bottom: 0.3rem; }
+.calendar__grid button { aspect-ratio: 1; border-radius: 8px; font-size: 0.92rem; color: var(--text); }
+.calendar__grid button:hover:not([disabled]) { background: var(--muted); }
+.calendar__grid button[disabled] { color: var(--text-dim); opacity: .45; cursor: not-allowed; }
+.calendar__grid button.is-active { background: var(--gradient); color: var(--on-accent); font-weight: 700; }
+.calendar__grid button.is-today { box-shadow: inset 0 0 0 1.5px var(--border-strong); }
+
+/* ---------- Поле с иконкой и префиксом ---------- */
+.input-group { display: flex; align-items: center; gap: 0.6rem; border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 0 0.9rem; background: var(--bg-elevated); }
+.input-group:focus-within { border-color: var(--accent); }
+.input-group svg { width: 18px; height: 18px; color: var(--text-dim); flex: none; }
+.input-group > span { color: var(--text-dim); font-size: 0.95rem; }
+.input-group input { flex: 1; border: 0; background: transparent; padding: 0.85rem 0; font: inherit; font-size: 16px; color: var(--text); min-height: 52px; }
+.input-group input:focus { outline: none; }
+
+/* ---------- Галочки и радио ---------- */
+.choice { display: flex; align-items: flex-start; gap: 0.65rem; padding: 0.7rem 0; cursor: pointer; }
+.choice input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--accent); flex: none; }
+.choice b { display: block; font-weight: 600; }
+.choice > div > span { color: var(--muted-fg); font-size: 0.92rem; }
+.choice-card { border: 1.5px solid var(--border); border-radius: var(--radius-ui); padding: 0.9rem 1rem; transition: border-color .2s, background-color .2s; }
+.choice-card:has(input:checked) { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 6%, transparent); }
+
+/* ---------- Тонкая прокрутка ---------- */
+.scroll-area { overflow: auto; scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent; max-height: 260px; }
+.scroll-area::-webkit-scrollbar { width: 8px; height: 8px; }
+.scroll-area::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 99px; }
+
+/* =========================================================
+   ЭФФЕКТЫ
+   ========================================================= */
+
+/* Бегущий огонёк по рамке */
+.beam { position: relative; border-radius: var(--radius-ui); overflow: hidden; padding: 1.5px; }
+.beam::before {
+  content: ""; position: absolute; inset: -150%;
+  background: conic-gradient(transparent 0deg, var(--accent) 40deg, transparent 90deg);
+  animation: beam-spin 4s linear infinite;
+}
+.beam__inner { position: relative; z-index: 1; border-radius: inherit; background: var(--card-bg); padding: 1.3rem; height: 100%; }
+@keyframes beam-spin { to { transform: rotate(360deg); } }
+
+/* Кнопка-магнит */
+.magnetic { transition: transform .25s var(--ease); will-change: transform; }
+
+/* Волна от клика */
+.ripple { position: relative; overflow: hidden; }
+.ripple__wave { position: absolute; border-radius: 50%; pointer-events: none; background: rgba(255,255,255,.45); transform: scale(0); animation: ripple .6s ease-out forwards; }
+@keyframes ripple { to { transform: scale(2.6); opacity: 0; } }
+
+/* Текст выезжает из-под маски */
+.reveal-text { display: inline-block; overflow: hidden; vertical-align: bottom; }
+.reveal-text > span { display: inline-block; transform: translateY(105%); transition: transform .7s var(--ease); }
+.reveal-text.is-in > span { transform: none; }
+
+/* Переворачивающаяся карточка */
+.flip { perspective: 1000px; }
+.flip__inner { position: relative; transform-style: preserve-3d; transition: transform .6s var(--ease); min-height: 190px; }
+.flip:hover .flip__inner, .flip:focus-within .flip__inner { transform: rotateY(180deg); }
+.flip__face {
+  position: absolute; inset: 0; backface-visibility: hidden;
+  display: flex; flex-direction: column; justify-content: center; gap: 0.5rem;
+  padding: 1.4rem; border-radius: var(--radius-ui);
+  border: 1px solid var(--border); background: var(--card-bg);
+}
+.flip__face--back { transform: rotateY(180deg); background: var(--gradient); color: var(--on-accent); border-color: transparent; }
+
+/* Стопка липких карточек */
+.stack > * { position: sticky; top: 90px; }
+.stack > *:nth-child(2) { top: 106px; }
+.stack > *:nth-child(3) { top: 122px; }
+.stack > *:nth-child(4) { top: 138px; }
+
+/* Мягкий цветной фон из пятен */
+.mesh { position: relative; isolation: isolate; }
+.mesh::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; filter: blur(60px); opacity: .45;
+  background:
+    radial-gradient(40% 40% at 20% 30%, var(--accent), transparent 70%),
+    radial-gradient(35% 35% at 80% 20%, var(--accent-2), transparent 70%),
+    radial-gradient(45% 45% at 60% 80%, color-mix(in srgb, var(--accent) 55%, #ffffff), transparent 70%);
+}
+
+/* Печатающийся текст */
+.typewriter { border-right: 2px solid var(--accent); padding-right: 2px; animation: caret 1s step-end infinite; }
+@keyframes caret { 50% { border-color: transparent; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .beam::before, .typewriter { animation: none; }
+  .reveal-text > span { transform: none; }
+  .flip__inner { transition: none; }
+}

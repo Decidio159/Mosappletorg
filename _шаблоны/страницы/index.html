@@ -1,0 +1,215 @@
+<!-- страница
+заголовок: {{название}} — новая и б/у техника Apple, DJI, Dyson в Москве
+описание: Магазин техники Apple у метро Бауманская: iPhone, iPad, MacBook, Watch и AirPods по ценам ниже розницы. Trade-in, выкуп, доставка по Москве и России, гарантия месяц.
+адрес: index.html
+-->
+<!-- вставить: голова -->
+<!-- вставить: шапка -->
+
+<main id="main">
+
+<!-- ================= ПЕРВЫЙ ЭКРАН ================= -->
+<section class="hero">
+  <div class="container">
+    <!-- Слайдер сам переключает баннеры; ссылок на них нет — это витрина,
+         а не набор кнопок. Разметку стрелок добавляет общее/js/баннеры.js -->
+    <div class="banners" data-banners>
+      <div class="banners__track" data-banners-track>
+        <div class="banners__slide">
+          <picture>
+            <source media="(max-width: 620px)" srcset="assets/banners/1-logo-mob.webp" width="900" height="700" />
+            <img src="assets/banners/1-logo.webp" alt="МосЭплТорг — магазин техники Apple в Москве" width="1600" height="500" loading="eager" fetchpriority="high"  />
+          </picture>
+        </div>
+        <div class="banners__slide" aria-hidden="true">
+          <picture>
+            <source media="(max-width: 620px)" srcset="assets/banners/2-iphone-mob.webp" width="900" height="700" />
+            <img src="assets/banners/2-iphone.webp" alt="iPhone 17 Pro Max и iPhone 16 Pro" width="1600" height="500" loading="lazy" decoding="async"  />
+          </picture>
+        </div>
+        <div class="banners__slide" aria-hidden="true">
+          <picture>
+            <source media="(max-width: 620px)" srcset="assets/banners/3-mac-mob.webp" width="900" height="700" />
+            <img src="assets/banners/3-mac.webp" alt="MacBook Air 15 M3 и iPad Pro" width="1600" height="500" loading="lazy" decoding="async"  />
+          </picture>
+        </div>
+        <div class="banners__slide" aria-hidden="true">
+          <picture>
+            <source media="(max-width: 620px)" srcset="assets/banners/4-watch-mob.webp" width="900" height="700" />
+            <img src="assets/banners/4-watch.webp" alt="Apple Watch Ultra 2, AirPods Pro 2 и AirPods Max" width="1600" height="500" loading="lazy" decoding="async"  />
+          </picture>
+        </div>
+        <div class="banners__slide" aria-hidden="true">
+          <picture>
+            <source media="(max-width: 620px)" srcset="assets/banners/5-camera-mob.webp" width="900" height="700" />
+            <img src="assets/banners/5-camera.webp" alt="Камеры и микрофоны DJI" width="1600" height="500" loading="lazy" decoding="async"  />
+          </picture>
+        </div>
+      </div>
+      <div class="banners__dots" data-banners-dots>
+        <button class="banners__dot is-active" type="button" data-banner-dot="0" aria-label="Баннер 1"></button>
+        <button class="banners__dot" type="button" data-banner-dot="1" aria-label="Баннер 2"></button>
+        <button class="banners__dot" type="button" data-banner-dot="2" aria-label="Баннер 3"></button>
+        <button class="banners__dot" type="button" data-banner-dot="3" aria-label="Баннер 4"></button>
+        <button class="banners__dot" type="button" data-banner-dot="4" aria-label="Баннер 5"></button>
+      </div>
+    </div>
+
+    <div class="hero__under">
+      <div>
+        <h1 class="hero__title" data-reveal>
+          {{название}} — техника Apple <span class="accent-text">дешевле розницы</span>
+        </h1>
+        <p class="hero__lead" data-reveal data-delay="1">
+          {{название}} — это новые и проверенные б/у iPhone, iPad, MacBook, Watch и AirPods
+          и живой магазин в центре Москвы, куда можно прийти и посмотреть. Всё новое запечатано
+          и не активировано, у б/у честно указано состояние батареи. Гарантия месяц на любую покупку.
+        </p>
+      </div>
+      <div class="hero__cta" data-reveal data-delay="2">
+        <a class="btn btn--primary" href="каталог.html">Смотреть каталог</a>
+        <a class="btn btn--ghost" href="{{телеграм_менеджер}}" rel="noopener" target="_blank">Спросить про наличие</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ПОЛОСА ДОВЕРИЯ ================= -->
+<!-- Бегущая строка: содержимое дублирует effects.js, писать дважды не нужно. -->
+<div class="marquee tape">
+  <div class="marquee__track">
+      <span class="tape__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>Гарантия месяц на всё</span>
+      <span class="tape__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>Своя курьерская служба</span>
+      <span class="tape__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="M9 9h.01"/><path d="M15 15h.01"/></svg>Trade-in до 90 % цены</span>
+      <span class="tape__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5"/><path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244"/><path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05"/></svg>Офлайн-точка у Бауманской</span>
+      <span class="tape__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-9"/><path d="M15.17 2.21a1.67 1.67 0 0 1 1.63 0L21 4.57a1.93 1.93 0 0 1 0 3.36L8.82 14.79a1.655 1.655 0 0 1-1.64 0L3 12.43a1.93 1.93 0 0 1 0-3.36z"/><path d="M20 13v3.87a2.06 2.06 0 0 1-1.11 1.83l-6 3.08a1.93 1.93 0 0 1-1.78 0l-6-3.08A2.06 2.06 0 0 1 4 16.87V13"/></svg>Доставка по РФ и СНГ</span>
+  </div>
+</div>
+
+<!-- ================= КАТЕГОРИИ ================= -->
+<section class="section section--soft">
+  <div class="container">
+    <p class="eyebrow" data-reveal>Каталог</p>
+    <h2 class="section-title" data-reveal>Что у нас есть</h2>
+    <p class="section-lead" data-reveal>Наличие меняется каждый день — актуальное всегда подтверждает менеджер.</p>
+
+    <div class="lenta" data-lenta style="margin-top: 2rem">
+      <div class="cats">
+      <a class="cat" href="каталог.html#smartphones" data-reveal>
+        <img src="assets/products/ip16p-1-min.webp" alt="iPhone" width="480" height="480" loading="lazy" decoding="async" />
+        <span class="cat__name">iPhone</span>
+        <span class="cat__note">от 51 990 ₽</span>
+      </a>
+      <a class="cat" href="каталог.html#tablets" data-reveal data-delay="1">
+        <img src="assets/products/ipadair11-1-min.webp" alt="iPad" width="480" height="480" loading="lazy" decoding="async" />
+        <span class="cat__name">iPad</span>
+        <span class="cat__note">от 29 990 ₽</span>
+      </a>
+      <a class="cat" href="каталог.html#laptops" data-reveal data-delay="2">
+        <img src="assets/products/mba13-m3-1-min.webp" alt="MacBook" width="480" height="480" loading="lazy" decoding="async" />
+        <span class="cat__name">Mac</span>
+        <span class="cat__note">от 63 990 ₽</span>
+      </a>
+      <a class="cat" href="каталог.html#watch" data-reveal data-delay="3">
+        <img src="assets/products/aw-ultra2-1-min.webp" alt="Apple Watch" width="480" height="480" loading="lazy" decoding="async" />
+        <span class="cat__name">Apple Watch</span>
+        <span class="cat__note">от 18 990 ₽</span>
+      </a>
+      <a class="cat" href="каталог.html#audio" data-reveal>
+        <img src="assets/products/app-pro2-1-min.webp" alt="AirPods" width="480" height="480" loading="lazy" decoding="async" />
+        <span class="cat__name">AirPods</span>
+        <span class="cat__note">от 10 990 ₽</span>
+      </a>
+      <a class="cat" href="каталог.html#cameras" data-reveal data-delay="1">
+        <img src="assets/products/dji-pocket4-1-min.webp" alt="Фото и видео: DJI, Insta360, Canon, GoPro" width="480" height="480" loading="lazy" decoding="async" />
+        <span class="cat__name">Фото и видео</span>
+        <span class="cat__note">DJI, Insta360, Canon</span>
+      </a>
+      <a class="cat" href="каталог.html#gadgets" data-reveal data-delay="2">
+        <img src="assets/products/dji-mic3-1-min.webp" alt="Гаджеты: Dyson, Honor, Garmin" width="480" height="480" loading="lazy" decoding="async" />
+        <span class="cat__name">Гаджеты</span>
+        <span class="cat__note">Dyson, Honor, Garmin</span>
+      </a>
+      <a class="cat" href="каталог.html#бу" data-reveal data-delay="3">
+        <img src="assets/products/ip15p-1-min.webp" alt="Б/У техника с гарантией" width="480" height="480" loading="lazy" decoding="async" />
+        <span class="cat__name">Б/У с гарантией</span>
+        <span class="cat__note">от 24 990 ₽</span>
+      </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRADE-IN ================= -->
+<section class="section" id="trade-in">
+  <div class="container">
+    <div class="grid grid--2" data-reveal>
+      <div>
+        <p class="eyebrow">Trade-in и выкуп</p>
+        <h2 class="section-title">Выкупим вашу технику — до 90 % от рыночной цены</h2>
+        <p class="section-lead">
+          Меняйте старое устройство на новое с доплатой или продайте его нам за деньги
+          сразу. Оценка бесплатная, по фото — за 15 минут в Телеграме.
+        </p>
+        <div class="steps" style="margin-top: 1.6rem">
+          <div class="step"><h3>Пишете нам</h3><p>Модель, память, состояние и пара фото</p></div>
+          <div class="step"><h3>Называем цену</h3><p>До осмотра и честно — она действует три дня</p></div>
+          <div class="step"><h3>Показываете технику</h3><p>В магазине у Бауманской или курьеру у вас дома</p></div>
+          <div class="step"><h3>Забираете своё</h3><p>Деньги сразу или новое устройство с доплатой</p></div>
+        </div>
+        <div class="hero__cta" style="margin-top: 1.8rem">
+          <a class="btn btn--primary" href="trade-in.html">Как это работает</a>
+          <a class="btn btn--ghost" href="{{телеграм_менеджер}}" rel="noopener" target="_blank">Оценить устройство</a>
+        </div>
+      </div>
+      <div class="tradein__mark">
+        <img src="assets/logo-black.webp" alt="МосЭплТорг" width="640" height="281" loading="lazy" decoding="async" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ОТЗЫВЫ ================= -->
+<section class="section section--soft">
+  <div class="container">
+    <p class="eyebrow" data-reveal>Отзывы</p>
+    <h2 class="section-title" data-reveal>Что пишут покупатели</h2>
+    <p class="section-lead" data-reveal>
+      Это настоящие отзывы с наших Яндекс Карт — там их нельзя удалить или подделать.
+    </p>
+
+    <div class="lenta" data-lenta style="margin-top: 2rem">
+      <div class="grid grid--3">
+      <article class="card review" data-reveal>
+        <div class="review__stars" aria-label="Оценка 5 из 5">★★★★★</div>
+        <p>«Всё супер! Ребята выручили в поздний час. Товар оригинал! Могу рекомендовать!»</p>
+        <div class="review__who"><b>Владислав И.</b><span>Яндекс Карты</span></div>
+      </article>
+      <article class="card review" data-reveal data-delay="1">
+        <div class="review__stars" aria-label="Оценка 5 из 5">★★★★★</div>
+        <p>«Уютный офис, оригинальная техника. В технике разбираются, всё подсказали,
+          угостили шоколадками) Спасибо, всем рекомендуем!»</p>
+        <div class="review__who"><b>Ольга В.</b><span>Яндекс Карты</span></div>
+      </article>
+      <article class="card review" data-reveal data-delay="2">
+        <div class="review__stars" aria-label="Оценка 5 из 5">★★★★★</div>
+        <p>«Приобретала себе фотоаппарат G7X Mark 3. Приятный офис и обслуживание,
+          со всем помогли разобраться.»</p>
+        <div class="review__who"><b>Елизавета Вартанова</b><span>Яндекс Карты</span></div>
+      </article>
+      </div>
+    </div>
+
+    <p style="margin-top: 2rem; text-align: center">
+      <a class="btn btn--ghost" href="{{отзывы_яндекс}}" rel="noopener" target="_blank">Все отзывы на Яндекс Картах</a>
+    </p>
+  </div>
+</section>
+
+<!-- вставить: форма -->
+
+</main>
+
+<!-- вставить: подвал -->
+<!-- вставить: корзина -->
+<!-- вставить: скрипты -->

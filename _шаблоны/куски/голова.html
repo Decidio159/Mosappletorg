@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>{{заголовок}}</title>
+<meta name="description" content="{{описание}}" />
+<meta name="robots" content="noindex, nofollow" /> <!-- МАКЕТ: убрать эту строку при сдаче сайта -->
+<link rel="canonical" href="{{домен}}{{адрес}}" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{{заголовок}}" />
+<meta property="og:description" content="{{описание}}" />
+<meta property="og:image" content="{{домен}}assets/og-image.jpg" />
+<meta property="og:url" content="{{домен}}{{адрес}}" />
+<meta name="theme-color" content="{{цвет_темы}}" />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+<!-- Шрифты грузятся первыми: иначе браузер узнаёт о них только после разбора
+     base.css и текст перерисовывается на глазах. -->
+<link rel="preload" href="шрифты/woff2/manrope-var.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="шрифты/woff2/inter-var.woff2" as="font" type="font/woff2" crossorigin />
+
+<link rel="stylesheet" href="общее/css/base.css" />
+<link rel="stylesheet" href="общее/css/blocks.css" />
+<link rel="stylesheet" href="общее/css/dividers.css" />
+<link rel="stylesheet" href="общее/css/effects.css" />
+<link rel="stylesheet" href="общее/css/ui.css" />
+<link rel="stylesheet" href="общее/css/ui-plus.css" />
+<link rel="stylesheet" href="theme.css" />
+</head>
+<body data-page="{{страница}}">
+
+<a class="skip-link" href="#main">К содержанию</a>

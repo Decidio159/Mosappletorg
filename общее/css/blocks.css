@@ -1,0 +1,221 @@
+/* =========================================================
+   БЛОКИ — из них собирается любой каркас.
+   Ниша меняет только состав и порядок блоков, не стили.
+   ========================================================= */
+
+/* ---------- Первый экран ---------- */
+.hero { position: relative; padding-block: clamp(3rem, 7vw, 6rem); overflow: hidden; }
+.hero__grid { display: grid; gap: clamp(2rem, 5vw, 4rem); align-items: center; grid-template-columns: 1.05fr 0.95fr; }
+.hero__title { margin-bottom: 1.2rem; }
+.hero__lead { color: var(--text-muted); font-size: 1.15rem; max-width: 52ch; margin-bottom: 2rem; }
+.hero__cta { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-bottom: 1.6rem; }
+.hero__facts { display: flex; flex-wrap: wrap; gap: 0.6rem 1.4rem; color: var(--text-muted); font-size: 0.96rem; }
+.hero__facts li { display: flex; align-items: center; gap: 0.5rem; }
+.hero__facts svg { width: 18px; height: 18px; color: var(--accent); flex: none; }
+@media (max-width: 900px) { .hero__grid { grid-template-columns: 1fr; } }
+
+/* ---------- Услуги ---------- */
+.service { display: flex; flex-direction: column; gap: 0.6rem; height: 100%; }
+.service h3 { margin-bottom: 0.2rem; }
+.service p { color: var(--text-muted); flex: 1; }
+.service__price { font-family: var(--font-head); font-weight: 700; color: var(--accent-deep); }
+
+/* ---------- Прайс-таблица ---------- */
+.price { width: 100%; border-collapse: collapse; }
+.price caption { text-align: left; padding-bottom: 0.8rem; color: var(--text-muted); }
+.price th, .price td { padding: 0.95rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+.price th { font-family: var(--font-head); font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+.price td:last-child, .price th:last-child { text-align: right; white-space: nowrap; font-weight: 600; }
+.price tbody tr:hover { background: var(--surface); }
+.price__wrap { overflow-x: auto; }
+.price__note { margin-top: 1rem; font-size: 0.92rem; color: var(--text-dim); }
+@media (max-width: 640px) {
+  .price thead { display: none; }
+  .price tr { display: grid; grid-template-columns: 1fr auto; gap: 0.2rem 1rem; padding-block: 0.8rem; border-bottom: 1px solid var(--border); }
+  .price td { border: none; padding: 0; }
+  .price td[data-l]::before { content: attr(data-l) ": "; color: var(--text-dim); font-size: 0.85rem; }
+}
+
+/* ---------- Карточки людей (мастера, врачи, бригада) ---------- */
+.person { text-align: center; }
+.person img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: var(--radius); margin-bottom: 0.9rem; }
+.person h3 { font-size: 1.15rem; }
+.person p { color: var(--text-muted); font-size: 0.95rem; }
+.person__tag { margin-top: 0.6rem; }
+
+/* ---------- Галерея / портфолио ---------- */
+.gallery { display: grid; gap: 0.9rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.gallery a { position: relative; overflow: hidden; border-radius: var(--radius-sm); aspect-ratio: 4 / 3; }
+.gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--ease); }
+.gallery a:hover img { transform: scale(1.06); }
+.gallery figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 0.7rem 0.9rem; background: linear-gradient(transparent, rgba(0,0,0,.72)); color: #fff; font-size: 0.9rem; }
+
+/* ---------- Каталог с фильтрами (услуги, товары, туры) ---------- */
+.filters { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.6rem; }
+.filters button { padding: 0.6rem 1.1rem; min-height: 44px; border-radius: var(--radius-pill); border: 1.5px solid var(--border); color: var(--text-muted); font-weight: 600; }
+.filters button.is-active { background: var(--gradient); color: var(--on-accent); border-color: transparent; }
+/* Карточка товара несёт классы .product и .catalog__item сразу, а
+   .product { display: flex } объявлен ниже и перебивает скрытие при равной
+   специфичности — фильтр переставал что-либо прятать. Отсюда двойной селектор. */
+.catalog__item, .product.catalog__item { display: none; }
+.catalog__item.is-shown, .product.catalog__item.is-shown { display: flex; }
+
+/* ---------- Запись на время ---------- */
+.booking { display: grid; gap: 1.4rem; grid-template-columns: 1.1fr 0.9fr; align-items: start; }
+.slots { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.slots button { min-width: 84px; min-height: 44px; padding: 0.5rem 0.9rem; border-radius: var(--radius-sm); border: 1.5px solid var(--border); font-weight: 600; }
+.slots button.is-active { background: var(--gradient); color: var(--on-accent); border-color: transparent; }
+.slots button[disabled] { opacity: 0.4; cursor: not-allowed; text-decoration: line-through; }
+.booking__day { font-family: var(--font-head); font-weight: 700; margin: 1.2rem 0 0.6rem; }
+@media (max-width: 860px) { .booking { grid-template-columns: 1fr; } }
+
+/* ---------- Калькулятор ---------- */
+.calc { display: grid; gap: 1.6rem; grid-template-columns: 1.1fr 0.9fr; align-items: start; }
+.calc__result { position: sticky; top: 90px; text-align: center; }
+.calc__sum { font-family: var(--font-head); font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.calc__row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.8rem 0; border-bottom: 1px solid var(--border); }
+.calc__row span { color: var(--text-muted); font-size: 0.95rem; }
+.calc input[type="range"] { width: 100%; accent-color: var(--accent); height: 44px; }
+@media (max-width: 860px) { .calc { grid-template-columns: 1fr; } .calc__result { position: static; } }
+
+/* ---------- Отзывы ---------- */
+.review { display: flex; flex-direction: column; gap: 0.9rem; height: 100%; }
+.review__stars { display: flex; gap: 0.2rem; color: #f5b301; }
+.review__stars svg { width: 18px; height: 18px; }
+/* Звёзды жёлтые, а цифра рядом — обычным текстом: жёлтым по светлому
+   она давала контраст 1,85:1 вместо 4,5:1. */
+.review__stars span { color: var(--text); font-weight: 600; }
+.review p { flex: 1; }
+.review__who { display: flex; align-items: center; gap: 0.7rem; font-size: 0.92rem; color: var(--text-muted); }
+.review__who img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+
+/* ---------- Контакты и карта ---------- */
+.contacts { display: grid; gap: 2rem; grid-template-columns: 0.9fr 1.1fr; align-items: start; }
+.contacts__list li { display: flex; gap: 0.8rem; padding: 0.8rem 0; border-bottom: 1px solid var(--border); }
+.contacts__list svg { width: 22px; height: 22px; color: var(--accent); flex: none; }
+.contacts__list b { display: block; font-family: var(--font-head); }
+.contacts__list span { color: var(--text-muted); font-size: 0.94rem; }
+/* Подпись-заглушка карты лежит на --surface, он темнее --bg-soft:
+   на --text-dim контраст проваливался ниже 4,5:1. */
+.map { border-radius: var(--radius); overflow: hidden; min-height: 320px; background: var(--surface); border: 1px solid var(--border); display: grid; place-items: center; color: var(--text-muted); text-align: center; padding: 1rem; }
+.map iframe { width: 100%; height: 100%; min-height: 320px; border: 0; }
+@media (max-width: 860px) { .contacts { grid-template-columns: 1fr; } }
+
+/* ---------- Форма заявки ---------- */
+.formblock { display: grid; gap: 2rem; grid-template-columns: 0.95fr 1.05fr; align-items: start; }
+.formblock > * { min-width: 0; } /* иначе колонка не сжимается ниже своего содержимого */
+.formblock__box { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius); padding: clamp(1.4rem, 3vw, 2.2rem); box-shadow: var(--shadow-sm); }
+@media (max-width: 860px) { .formblock { grid-template-columns: 1fr; } }
+
+/* ---------- Полоса доверия ---------- */
+.trustbar { display: flex; flex-wrap: wrap; gap: 1rem 2.4rem; justify-content: center; color: var(--text-muted); }
+.trustbar li { display: flex; align-items: center; gap: 0.6rem; font-weight: 600; }
+.trustbar svg { width: 22px; height: 22px; color: var(--accent); }
+
+/* ---------- Карточка товара (витрина-магазин) ---------- */
+.product { display: flex; flex-direction: column; gap: 0.6rem; height: 100%; position: relative; }
+.product img { aspect-ratio: 1 / 1; object-fit: cover; border-radius: var(--radius-sm); background: var(--surface); }
+.product__name { font-family: var(--font-head); font-size: 1.05rem; }
+.product__row { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; margin-top: auto; }
+.product__price { font-family: var(--font-head); font-size: 1.25rem; font-weight: 700; }
+.product__old { color: var(--text-dim); text-decoration: line-through; font-size: 0.9rem; margin-left: 0.4rem; }
+.product__tag { position: absolute; top: 0.7rem; left: 0.7rem; background: var(--accent); color: var(--on-accent); font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: var(--radius-pill); }
+.product .btn { min-height: 44px; padding-inline: 1.1rem; }
+
+/* ---------- Корзина ---------- */
+.cart-btn { position: relative; display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; padding: 0 0.8rem; border-radius: var(--radius-pill); font-weight: 600; }
+.cart-btn svg { width: 22px; height: 22px; }
+.cart-btn__count { min-width: 22px; height: 22px; border-radius: 99px; background: var(--accent); color: var(--on-accent); font-size: 0.78rem; display: grid; place-items: center; padding-inline: 6px; }
+
+/* На узком экране в шапке остаётся значок корзины без слова: вместе с текстом
+   она выталкивала бургер за край, и на 320 px появлялась прокрутка вбок. */
+@media (max-width: 480px) {
+  .header .cart-btn { font-size: 0; gap: 0; padding-inline: 0.6rem; }
+  .header .cart-btn__count { font-size: 0.7rem; position: absolute; top: 2px; right: 0; }
+}
+.cart-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(420px, 100%); z-index: 200;
+  background: var(--bg-elevated); border-left: 1px solid var(--border); box-shadow: var(--shadow);
+  transform: translateX(105%); transition: transform 0.35s var(--ease);
+  display: flex; flex-direction: column;
+}
+.cart-panel.is-open { transform: none; }
+.cart-panel__head { display: flex; align-items: center; justify-content: space-between; padding: 1.2rem var(--gutter); border-bottom: 1px solid var(--border); }
+.cart-panel__body { flex: 1; overflow-y: auto; padding: 1rem var(--gutter); }
+.cart-panel__foot { padding: 1.2rem var(--gutter) calc(1.2rem + env(safe-area-inset-bottom)); border-top: 1px solid var(--border); }
+.cart-line { display: grid; grid-template-columns: 56px 1fr auto; gap: 0.8rem; align-items: center; padding: 0.8rem 0; border-bottom: 1px solid var(--border); }
+.cart-line img { width: 56px; height: 56px; object-fit: cover; border-radius: var(--radius-sm); }
+.cart-line b { display: block; font-family: var(--font-head); font-size: 0.98rem; }
+.cart-line span { color: var(--text-muted); font-size: 0.88rem; }
+.cart-line button { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border); display: grid; place-items: center; } /* 44 px — минимальная цель для пальца из тех-листа */
+.cart-total { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1rem; }
+.cart-total b { font-family: var(--font-head); font-size: 1.5rem; }
+.cart-overlay { position: fixed; inset: 0; z-index: 199; background: rgba(0,0,0,.45); opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+.cart-overlay.is-open { opacity: 1; pointer-events: auto; }
+
+/* ---------- Меню заведения (ресторан) ---------- */
+.menu-list { display: grid; gap: 0.2rem; }
+.menu-item { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem 1rem; align-items: baseline; padding: 0.9rem 0; border-bottom: 1px dashed var(--border); }
+.menu-item b { font-family: var(--font-head); font-size: 1.08rem; }
+.menu-item p { grid-column: 1 / -1; color: var(--text-muted); font-size: 0.92rem; margin-top: 0.2rem; }
+.menu-item span { font-family: var(--font-head); font-weight: 700; white-space: nowrap; }
+
+/* ---------- Карточка тура / курса ---------- */
+.offer { display: flex; flex-direction: column; height: 100%; overflow: hidden; padding: 0; }
+.offer img { aspect-ratio: 16 / 10; object-fit: cover; }
+.offer__body { padding: clamp(1.1rem, 2.2vw, 1.5rem); display: flex; flex-direction: column; gap: 0.6rem; flex: 1; }
+.offer__meta { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; color: var(--text-muted); font-size: 0.9rem; }
+.offer__meta svg { width: 16px; height: 16px; vertical-align: -3px; margin-right: 0.3rem; }
+.offer__foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: auto; padding-top: 0.6rem; }
+.offer__price { font-family: var(--font-head); font-size: 1.2rem; font-weight: 700; }
+
+/* ---------- Прелоадер с логотипом ----------
+   Разметка: <div class="preloader"><img class="preloader__mark" ...></div>
+   первым элементом <body>. Снимается скриптом preloader.js по window.load:
+   на <html> появляется класс is-loaded. Без скрипта и без JS экран уходит
+   сам через 2,5 с — гость никогда не остаётся перед пустым фоном. */
+.preloader {
+  /* Выше плашки cookie (1500) — иначе она проступает сквозь экран загрузки */
+  position: fixed; inset: 0; z-index: 2000;
+  display: grid; place-items: center;
+  background: var(--wave-bg);
+  animation: preloader-hide 0s linear 2.5s forwards;
+}
+.preloader__mark {
+  width: clamp(96px, 18vw, 150px); height: auto;
+  animation: preloader-spin 3.2s linear infinite;
+}
+.preloader__word {
+  position: absolute; bottom: clamp(2rem, 8vh, 4rem);
+  font-family: var(--font-head); letter-spacing: 0.42em;
+  text-transform: uppercase; font-size: 0.82rem;
+  color: var(--accent); opacity: 0.75; padding-left: 0.42em;
+}
+@keyframes preloader-spin { to { transform: rotate(360deg); } }
+@keyframes preloader-hide { to { opacity: 0; visibility: hidden; } }
+html.is-loaded .preloader {
+  animation: none;
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.6s var(--ease), visibility 0.6s var(--ease);
+}
+/* Пока прелоадер виден — страница под ним не прокручивается */
+/* Замок прокрутки нужен только там, где есть экран загрузки: снимает его
+   preloader.js, и без него страница оставалась запертой навсегда. */
+html.has-preloader:not(.is-loaded) body { overflow: hidden; }
+@media (prefers-reduced-motion: reduce) {
+  .preloader__mark { animation: none; }
+}
+
+/* ---------- Кнопки соцсетей ----------
+   Разметка: <ul class="socials"><li><a href="..." aria-label="ВКонтакте">svg</a> */
+.socials { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.socials a {
+  display: grid; place-items: center;
+  width: 44px; height: 44px; flex: none;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  color: var(--text-muted);
+  transition: color 0.25s var(--ease), border-color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+.socials a:hover { color: var(--accent-deep); border-color: var(--border-strong); transform: translateY(-2px); }
+.socials svg { width: 21px; height: 21px; }

@@ -1,0 +1,298 @@
+/* =========================================================
+   НОУТБУК В HERO — 3/4-ракурс + кружка кофе с паром.
+   Сюжет на экране: поисковик → клик по нашему сайту → сайт.
+   Не оверлей: не перекрывает сайт, не блокирует скролл.
+
+   Прогрессивное улучшение:
+   • без JS — ноутбук виден и показывает превью сайта;
+   • с JS — прячется до появления в вьюпорте, затем играет.
+   Внутренности экрана — в cqw (масштабируются с ноутбуком).
+
+   РАКУРС вынесен в переменные на .laptop (--spin/--tiltX/
+   --lid/--deck) — правь их, чтобы подстроить угол.
+   ========================================================= */
+
+.laptop-scene { position: relative; width: 100%; }
+/* Появление только при активном JS */
+.js .laptop-scene {
+  opacity: 0;
+  transform: translateY(16px) scale(0.98);
+  transition: opacity 0.8s var(--ease), transform 0.9s var(--ease);
+}
+.js .laptop-scene.is-in { opacity: 1; transform: none; }
+
+/* 3/4-ракурс. Перспектива внутри самого transform — не зависит
+   от родителей и не ломается при fade-in сцены. */
+.laptop {
+  --spin: -22deg;   /* поворот вокруг вертикали (знак зеркалит ракурс) */
+  --tiltX: 11deg;   /* наклон «сверху» */
+  --lid: -6deg;     /* лёгкий отклон экрана назад */
+  --deck: 68deg;    /* раскрытие деки в горизонталь */
+  --thick: 12px;    /* толщина корпуса (объём) */
+  position: relative;
+  width: 90%;
+  margin-inline: auto;
+  transform-style: preserve-3d;
+  transform: perspective(1500px) rotateX(var(--tiltX)) rotateY(var(--spin));
+  transform-origin: center 42%;
+}
+/* На десктопе (2 колонки) — крупнее и сдвинут правее, чтобы не заходил на текст */
+@media (min-width: 900px) {
+  .laptop {
+    width: 92%;
+    transform: perspective(1500px) translateX(6%) rotateX(var(--tiltX)) rotateY(var(--spin));
+  }
+}
+/* ---------- Телефон: моноблок вместо ноутбука ----------
+   Причина переделки: Safari на iPhone не перерисовывает содержимое экрана,
+   когда оно лежит внутри 3D-сцены (perspective + preserve-3d) — ноутбук
+   виден, а экран белый, пока не зумнёшь страницу. Лечится только удалением
+   самой причины: на телефоне сцена собирается плоской, без поворотов.
+   Раскладывать клавиатуру «в лоб» бессмысленно, поэтому корпус получает
+   ножку и подставку — читается как моноблок (iMac).
+   Селекторы с .laptop-scene — чтобы перебить базовые правила ниже по файлу. */
+@media (max-width: 899px) {
+  .laptop-scene .laptop {
+    width: 84%;
+    transform: none;
+    transform-style: flat;
+  }
+  .laptop-scene .laptop__screen {
+    transform: none;
+    transform-style: flat;
+    border: 2px solid #23262e;
+    border-radius: 16px;
+    /* снизу «подбородок» корпуса, как у моноблока */
+    padding: 10px 10px 22px;
+    /* Подбородок — того же серебристого цвета, что ножка и подставка:
+       полоса нужной высоты прижата к низу, остальная площадь тёмная. */
+    background:
+      linear-gradient(180deg, #cfd4dc 0%, #a9afb9 100%) bottom / 100% 22px no-repeat,
+      #0b0c10;
+  }
+
+  /* Основание: тут живут ножка и подставка */
+  .laptop-scene .laptop__base {
+    position: relative;
+    transform: none;
+    aspect-ratio: auto;
+    height: 42px;
+    margin-top: 0;
+  }
+  .laptop-scene .deck__hinge,
+  .laptop-scene .deck__keys,
+  .laptop-scene .deck__pad { display: none; }
+
+  /* Ножка — узкая шея по центру, продолжает корпус */
+  .laptop-scene .deck__top {
+    inset: auto;
+    top: 0; left: 50%;
+    width: 20%; height: 30px;        /* доходит до подставки без зазора */
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, #cfd4dc 0%, #a9afb9 100%);
+    border-radius: 0 0 7px 7px;
+    box-shadow: none;
+  }
+  /* Подставка — широкое плоское основание */
+  .laptop-scene .deck__body {
+    inset: auto;
+    bottom: 0; left: 50%;
+    width: 44%; height: 12px;
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, #c2c7d0 0%, #8f959f 100%);
+    border-radius: 10px;
+    box-shadow: 0 6px 16px -8px rgba(0, 0, 0, 0.8);
+  }
+}
+
+/* ---------- Крышка / экран ---------- */
+.laptop__screen {
+  position: relative;
+  background: #0b0c10;
+  border: 2px solid #23262e;
+  border-bottom: none;
+  border-radius: 16px 16px 0 0;   /* низ прямой — стыкуется с декой без зазора */
+  padding: 10px 10px 11px;
+  box-shadow: inset 0 0 0 2px #000, 0 30px 70px -30px rgba(0, 0, 0, 0.85);
+  transform-style: preserve-3d;
+  transform-origin: bottom center;
+  transform: rotateX(var(--lid));
+}
+.laptop__screen::before { /* камера */
+  content: "";
+  position: absolute; top: 5px; left: 50%; transform: translateX(-50%);
+  width: 5px; height: 5px; border-radius: 50%; background: #2b2f38; z-index: 2;
+}
+
+/* Внутренняя область экрана — container для cqw */
+.laptop__viewport {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  width: 100%;
+  border-radius: 6px 6px 0 0;   /* низ прямой — без «крючков» на стыке */
+  overflow: hidden;
+  background: #fff;
+  container-type: inline-size;
+}
+
+/* ---------- Клавиатурная дека (разложена в горизонталь) ----------
+   Объём — приёмом 2.5D: тёмный «корпус» (.deck__body) выглядывает
+   из-под деки на видимых гранях (перёд + правый бок), создавая
+   толщину без хрупких 3D-стенок. Клавиатура — градиентная сетка. */
+.laptop__base {
+  position: relative;
+  width: 100%;
+  margin: -3px auto 0;
+  aspect-ratio: 2.4 / 1;
+  transform-origin: top center;
+  transform: rotateX(var(--deck));
+  /* без filter: drop-shadow — он растеризовал деку в 1x и мылил клавиши;
+     на тёмном фоне тень всё равно почти не видна */
+}
+
+/* Корпус-толщина (выглядывает по переднему краю) */
+.deck__body {
+  position: absolute; inset: 0; z-index: 0;
+  transform: translate(calc(var(--thick) * 0.2), var(--thick));
+  background: linear-gradient(180deg, #8b8f98 0%, #6d7178 100%);
+  border-radius: 0 0 14px 14px;
+}
+
+/* Верхняя поверхность деки */
+.deck__top {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, #d5d9e0 0%, #b6bac3 55%, #9a9ea8 100%);
+  border-radius: 0 0 12px 12px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+/* Петля-перемычка на самом стыке экрана и деки */
+.deck__hinge {
+  position: absolute; top: 0; left: 0; right: 0; height: 8%;
+  background: linear-gradient(180deg, #34373c 0%, #55585f 50%, #3f4247 100%);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.18), 0 2px 3px rgba(0, 0, 0, 0.35);
+}
+
+/* Клавиатура — настоящие клавиши (генерируются в laptop.js) */
+.deck__keys {
+  position: absolute; top: 15%; left: 8%; right: 8%; bottom: 33%;
+  display: flex; flex-direction: column; gap: 3.4%;
+  padding: 2.6% 2.4%;
+  background: #4c515a;                 /* тёмные бороздки между клавишами — выше контраст */
+  border-radius: 5px;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+.deck__row { display: flex; gap: 2%; flex: 1; }
+.deck__row--fn { flex: 0.6; }
+.key {
+  flex: 1; border-radius: 2px;
+  /* светлее клавиша + резче переход = чётче на фоне тёмных бороздок */
+  background: linear-gradient(180deg, #ffffff 0%, #dbe0e8 48%, #aeb5c1 100%);
+  box-shadow: 0 1.5px 0 rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+.key--wide { flex: 1.7; }
+.key--space { flex: 6; }
+
+/* Тачпад ближе к переднему краю */
+.deck__pad {
+  position: absolute; bottom: 7%; left: 50%; transform: translateX(-50%);
+  width: 30%; height: 20%;
+  background: linear-gradient(180deg, #e9ecf1, #d2d7de);
+  border: 1px solid rgba(0, 0, 0, 0.2); border-radius: 4px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12), 0 -1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* ---------- Браузер ---------- */
+.browser { position: absolute; inset: 0; display: flex; flex-direction: column; background: #fff; }
+.browser__bar {
+  display: flex; align-items: center; gap: 1.2cqw;
+  height: 5.6cqw; min-height: 22px; padding: 0 2.4cqw;
+  background: #edeef1; border-bottom: 1px solid #dfe1e5; flex: none;
+}
+.browser__bar .dot { width: 1.4cqw; height: 1.4cqw; min-width: 7px; min-height: 7px; border-radius: 50%; flex: none; }
+.dot--r { background: #ff5f57; } .dot--y { background: #febc2e; } .dot--g { background: #28c840; }
+.browser__url {
+  flex: 1; margin-left: 1.6cqw; height: 62%;
+  display: flex; align-items: center; padding: 0 3cqw;
+  background: #fff; border-radius: 999px; font-size: 2.9cqw; color: #5f6368;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.browser__body { position: relative; flex: 1; overflow: hidden; }
+.browser__progress {
+  position: absolute; top: 0; left: 0; height: 3px; width: 0;
+  background: var(--gradient);
+  z-index: 5; opacity: 0; transition: width 0.7s var(--ease), opacity 0.2s var(--ease);
+}
+.browser.is-loading .browser__progress { opacity: 1; width: 100%; }
+
+/* Экраны переключаются кроссфейдом */
+.screen {
+  position: absolute; inset: 0;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 0.5s var(--ease);
+}
+.screen.is-shown { opacity: 1; visibility: visible; }
+
+/* --- Экран 1: поисковик --- */
+.search { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3.1cqw; background: #fff; padding: 0 8%; }
+.search__logo {
+  font-weight: 800; letter-spacing: -0.03em; font-size: 11cqw; line-height: 1;
+  background: var(--gradient);   /* тёмно-синий — читается на белом фоне браузера */
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.search__box {
+  display: flex; align-items: center; gap: 2cqw; width: 74cqw; padding: 1.9cqw 4cqw;
+  border: 1px solid #dfe1e5; border-radius: 999px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  font-size: 3.8cqw; color: #202124;
+}
+.search__box svg { flex: none; width: 4cqw; height: 4cqw; min-width: 12px; min-height: 12px; color: #9aa0a6; }
+.search__text { white-space: nowrap; overflow: hidden; }
+.caret { display: inline-block; width: 1px; height: 1.1em; background: #202124; margin-left: 1px; animation: caret 1s steps(1) infinite; }
+@keyframes caret { 50% { opacity: 0; } }
+
+/* --- Экран 2: выдача --- */
+.results { background: #fff; padding: 2.5cqw 7cqw; overflow: hidden; }
+.results__bar {
+  display: flex; align-items: center; gap: 2cqw; width: 66cqw; padding: 1cqw 3.4cqw; margin-bottom: 3.1cqw;
+  border: 1px solid #dfe1e5; border-radius: 999px; font-size: 3cqw; color: #202124;
+}
+.results__bar svg { color: #9aa0a6; flex: none; width: 3.4cqw; height: 3.4cqw; min-width: 10px; min-height: 10px; }
+.result { display: block; margin-bottom: 2.75cqw; border-radius: 2cqw; padding: 2cqw; transition: background 0.3s var(--ease); }
+.result__url { font-size: 2.7cqw; color: #5f6368; }
+.result__title { font-size: 4.2cqw; color: #1a0dab; font-weight: 500; margin: 0.4cqw 0; }
+.result__desc { font-size: 3cqw; color: #4d5156; line-height: 1.4; }
+.result--top.is-hover { background: #f1f3ff; }
+
+/* --- Экран 3: превью нашего сайта (виден по умолчанию без JS) --- */
+.sitepreview { background: #0a0a0b; color: #ffffff; display: flex; flex-direction: column; overflow: hidden; }
+.sitepreview__glow { position: absolute; inset: -30% 0 auto 0; height: 70%; background: radial-gradient(60% 60% at 50% 20%, rgba(15, 76, 129, 0.45), transparent 70%); pointer-events: none; }
+.sitepreview__nav { position: relative; display: flex; align-items: center; justify-content: space-between; padding: 2.5cqw 5cqw; }
+.sitepreview__logo { display: inline-flex; align-items: center; font-weight: 700; font-size: 3.4cqw; letter-spacing: -0.02em; }
+.sitepreview__logo span { color: var(--accent-2); }
+/* Знак слева от надписи — как в настоящей шапке сайта. Размер в em,
+   поэтому масштабируется вместе с макетом (и в ноутбуке, и в моноблоке).
+   Отступ margin'ом, а не gap'ом: gap разнёс бы «Decid» и «io». */
+.sitepreview__logo img { width: 1.5em; height: 1.5em; flex: none; display: block; margin-right: 0.35em; }
+.sitepreview__pill { font-size: 2.7cqw; padding: 0.9cqw 3.4cqw; border-radius: 999px; background: var(--gradient); color: #fff; }
+.sitepreview__hero { position: relative; flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 6cqw; }
+.sitepreview__eyebrow { font-size: 2.4cqw; letter-spacing: 0.14em; text-transform: uppercase; color: var(--warm); font-weight: 600; margin-bottom: 1.25cqw; }
+.sitepreview__title { font-size: 7.6cqw; line-height: 1.05; font-weight: 800; letter-spacing: -0.02em; max-width: 20ch; }
+.sitepreview__title b { background: var(--gradient-text); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
+.sitepreview__btn { align-self: flex-start; margin-top: 2.2cqw; font-size: 3.2cqw; font-weight: 600; padding: 1.25cqw 4.4cqw; border-radius: 999px; background: var(--gradient); color: #fff; }
+
+/* ---------- Курсор (внутри экрана) ---------- */
+.lap-cursor {
+  position: absolute; top: 0; left: 0; z-index: 6;
+  width: 5cqw; height: 5cqw; min-width: 14px; min-height: 14px;
+  pointer-events: none; opacity: 0;
+  transform: translate(50cqw, 55cqw);
+  transition: transform 0.9s var(--ease), opacity 0.4s var(--ease);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+}
+.lap-cursor.is-visible { opacity: 1; }
+.lap-cursor.is-click { transform: translate(var(--cx), var(--cy)) scale(0.82); }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .laptop-scene { opacity: 1; transform: none; }
+  .caret { animation: none; }
+}

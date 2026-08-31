@@ -1,0 +1,26 @@
+/* =========================================================
+   ВОЛНОВАЯ ПЛАСТИНА — band внизу сайта (над футером).
+   Полноширинная полоса с canvas. Верх плавно растворяется
+   в секции выше через mask-градиент.
+   ========================================================= */
+
+.wave-band {
+  position: relative;
+  width: 100%;
+  height: clamp(320px, 46vh, 540px);
+  overflow: hidden;
+  background: var(--wave-bg, var(--bg));
+  /* верхний край растворяется в предыдущей секции */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 20%, #000 100%);
+          mask-image: linear-gradient(to bottom, transparent 0%, #000 20%, #000 100%);
+  /* Цвета волны задаёт тема ниши:
+       --wave-bg   — фон полосы (тёмный, иначе точек не видно)
+       --wave-tint — оттенок точек, три числа: "125 185 245" */
+}
+.wave-band__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}

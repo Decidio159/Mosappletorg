@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 560" width="560" height="560" role="img" aria-label="Здесь будет фото товара">
+<rect width="560" height="560" fill="#ffffff"/>
+<g fill="none" stroke="#9aa3b2" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="196" y="196" width="168" height="168" rx="18"/>
+<circle cx="243" cy="245" r="16"/>
+<path d="M200 330l52-48 42 38 30-26 36 32"/>
+</g>
+<g font-family="Inter, system-ui, sans-serif" text-anchor="middle" fill="#5b6577">
+<text x="50%" y="412" font-size="26" font-weight="700">Здесь будет фото</text>
+<text x="50%" y="446" font-size="26" font-weight="700">этого товара</text>
+<text x="50%" y="486" font-size="19" font-weight="500" fill="#79839a">пришлите снимки — поставим</text>
+</g>
+</svg>

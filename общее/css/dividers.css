@@ -1,0 +1,119 @@
+/* =========================================================
+   РАЗДЕЛИТЕЛИ СЕКЦИЙ И ФОНОВЫЕ ПАТТЕРНЫ
+   Всё на CSS, без картинок: перекрашивается переменной,
+   тянется на любую ширину, весит ноль.
+
+   Как пользоваться:
+     <div class="divider divider--wave"></div>
+     <div class="divider divider--skew divider--flip"></div>
+   Цвет = цвет СЛЕДУЮЩЕЙ секции: --div-color (по умолчанию --bg-soft).
+   ========================================================= */
+
+.divider {
+  --div-color: var(--bg-soft);
+  --div-h: clamp(40px, 6vw, 90px);
+  position: relative;
+  height: var(--div-h);
+  width: 100%;
+  background: var(--div-color);
+  pointer-events: none;
+}
+.divider--flip { transform: scaleY(-1); }
+.divider--tall { --div-h: clamp(70px, 10vw, 150px); }
+
+/* 1. Волна — мягкая одиночная */
+.divider--wave {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0,60 C200,110 380,0 600,40 C820,80 1000,10 1200,50 L1200,100 L0,100 Z'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0,60 C200,110 380,0 600,40 C820,80 1000,10 1200,50 L1200,100 L0,100 Z'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+}
+
+/* 2. Двойная волна — оживлённее, для «мягких» ниш */
+.divider--wave2 {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0,40 C150,90 250,0 400,45 C550,90 650,10 800,45 C950,80 1050,20 1200,55 L1200,100 L0,100 Z'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0,40 C150,90 250,0 400,45 C550,90 650,10 800,45 C950,80 1050,20 1200,55 L1200,100 L0,100 Z'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+}
+
+/* 3. Скос — одна прямая линия под углом */
+.divider--skew {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0,100 L1200,0 L1200,100 Z'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0,100 L1200,0 L1200,100 Z'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+}
+
+/* 4. Диагональ-домик — сходится к центру */
+.divider--diagonal {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0,100 L600,0 L1200,100 Z'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0,100 L600,0 L1200,100 Z'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+}
+
+/* 5. Зигзаг — техника, стройка */
+.divider--zigzag {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0,100 L0,50 L150,100 L300,40 L450,100 L600,40 L750,100 L900,40 L1050,100 L1200,50 L1200,100 Z'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0,100 L0,50 L150,100 L300,40 L450,100 L600,40 L750,100 L900,40 L1050,100 L1200,50 L1200,100 Z'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+}
+
+/* 6. Арка — красота, отдых, детские */
+.divider--arch {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0,100 L0,90 C300,-30 900,-30 1200,90 L1200,100 Z'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0,100 L0,90 C300,-30 900,-30 1200,90 L1200,100 Z'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+}
+
+/* 7. Рваная бумага — крафт, еда, хендмейд */
+.divider--paper {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0,70 L60,55 L130,75 L210,50 L290,72 L370,48 L450,70 L540,52 L620,74 L700,55 L790,72 L870,50 L950,68 L1040,52 L1120,72 L1200,58 L1200,100 L0,100 Z'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0,70 L60,55 L130,75 L210,50 L290,72 L370,48 L450,70 L540,52 L620,74 L700,55 L790,72 L870,50 L950,68 L1040,52 L1120,72 L1200,58 L1200,100 L0,100 Z'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+}
+
+/* 8. Ступеньки — строгие ниши, магазины */
+.divider--steps {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0,100 L0,75 L300,75 L300,50 L600,50 L600,25 L900,25 L900,0 L1200,0 L1200,100 Z'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath d='M0,100 L0,75 L300,75 L300,50 L600,50 L600,25 L900,25 L900,0 L1200,0 L1200,100 Z'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+}
+
+/* =========================================================
+   ФОНОВЫЕ ПАТТЕРНЫ — вешаются на .section
+   ========================================================= */
+
+.bg-dots, .bg-grid, .bg-stripes, .bg-noise, .bg-haze, .bg-blob { position: relative; isolation: isolate; }
+.bg-dots::before, .bg-grid::before, .bg-stripes::before,
+.bg-noise::before, .bg-haze::before, .bg-blob::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+}
+
+/* Точечная сетка */
+.bg-dots::before {
+  background-image: radial-gradient(currentColor 1px, transparent 1px);
+  background-size: 22px 22px;
+  opacity: 0.10;
+}
+/* Клетка */
+.bg-grid::before {
+  background-image:
+    linear-gradient(to right, currentColor 1px, transparent 1px),
+    linear-gradient(to bottom, currentColor 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.07;
+}
+/* Диагональные полосы */
+.bg-stripes::before {
+  background-image: repeating-linear-gradient(45deg, currentColor 0 2px, transparent 2px 14px);
+  opacity: 0.06;
+}
+/* Шум — лёгкая «плёнка», убирает пластиковость плоских заливок */
+.bg-noise::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.05;
+}
+/* Градиентная дымка — цветное свечение сверху */
+.bg-haze::before {
+  background:
+    radial-gradient(60% 50% at 20% 0%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%),
+    radial-gradient(50% 45% at 90% 10%, color-mix(in srgb, var(--accent-2) 18%, transparent), transparent 70%);
+}
+/* Размытое пятно — модный «блоб» за контентом */
+.bg-blob::before {
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 35%, transparent), transparent);
+  inset: auto -10% -20% auto;
+  width: min(60vw, 620px); height: min(60vw, 620px);
+  filter: blur(60px);
+  border-radius: 50%;
+}

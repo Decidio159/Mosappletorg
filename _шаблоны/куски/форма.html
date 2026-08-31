@@ -1,0 +1,44 @@
+<!-- ================= ЗАЯВКА ================= -->
+<section class="section" id="form">
+  <div class="container">
+    <div class="formblock" data-reveal>
+      <div>
+        <p class="eyebrow">Заявка</p>
+        <h2 class="section-title">Проверим наличие и назовём итоговую цену</h2>
+        <p class="section-lead">{{обещание_формы}}</p>
+        <ul class="hero__facts" style="margin-top: 1.6rem">
+          <li>Отвечаем в рабочие часы, {{часы}}</li>
+          <li>Не звоним без вашей просьбы — пишем в мессенджер</li>
+          <li>Можно сразу спросить про Trade-in вашего устройства</li>
+        </ul>
+        <p class="muted" style="margin-top: 1.4rem">
+          Быстрее всего — написать менеджеру:
+          <a class="accent-text" href="{{телеграм_менеджер}}" rel="noopener" target="_blank">@appletorg_manager</a>
+        </p>
+      </div>
+
+      <div class="formblock__box">
+        <form data-form action="общее/send.php" method="post" novalidate>
+          <label class="field"><span>Имя *</span><input class="input" type="text" name="name" required autocomplete="name" /></label>
+          <label class="field"><span>Телефон или Телеграм *</span><input class="input" type="tel" name="contact" required autocomplete="tel" placeholder="+7 (___) ___-__-__" data-phone /></label>
+          <label class="field"><span>Что интересует</span><textarea class="textarea" name="task" rows="3" placeholder="Например: iPhone 16 Pro 256 ГБ, чёрный титан"></textarea></label>
+          <label class="field"><span>Откуда о нас узнали</span>
+            <select class="select" name="source">
+              <option value="">Не важно</option>
+              <option>Поиск</option>
+              <option>Яндекс Карты</option>
+              <option>Телеграм</option>
+              <option>Инстаграм</option>
+              <option>Посоветовали</option>
+            </select>
+          </label>
+          <div class="hp"><label>Не заполняйте это поле<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+          <label class="check"><input type="checkbox" name="agree" required /><span>Согласен на обработку персональных данных и с <a href="privacy.html" style="text-decoration: underline">политикой конфиденциальности</a></span></label>
+          <button class="btn btn--primary btn--wide" type="submit">Отправить заявку</button>
+          <p class="form__msg" role="status" aria-live="polite"></p>
+          <p class="form__note">Номер нужен только чтобы ответить. Третьим лицам не передаём.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<!-- Собрано инструменты/собрать.py из _шаблоны/. Руками не править: правки затрутся. -->
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Каталог — МосЭплТорг</title>
+<meta name="description" content="iPhone, iPad, MacBook, Apple Watch, AirPods, камеры DJI и Insta360 в наличии в Москве. Цены, наличие, доставка и Trade-in." />
+<meta name="robots" content="noindex, nofollow" /> <!-- МАКЕТ: убрать эту строку при сдаче сайта -->
+<link rel="canonical" href="https://mosappletorg.ru/каталог.html" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Каталог — МосЭплТорг" />
+<meta property="og:description" content="iPhone, iPad, MacBook, Apple Watch, AirPods, камеры DJI и Insta360 в наличии в Москве. Цены, наличие, доставка и Trade-in." />
+<meta property="og:image" content="https://mosappletorg.ru/assets/og-image.jpg" />
+<meta property="og:url" content="https://mosappletorg.ru/каталог.html" />
+<meta name="theme-color" content="#ffffff" />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+<!-- Шрифты грузятся первыми: иначе браузер узнаёт о них только после разбора
+     base.css и текст перерисовывается на глазах. -->
+<link rel="preload" href="шрифты/woff2/manrope-var.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="шрифты/woff2/inter-var.woff2" as="font" type="font/woff2" crossorigin />
+
+<link rel="stylesheet" href="общее/css/base.css" />
+<link rel="stylesheet" href="общее/css/blocks.css" />
+<link rel="stylesheet" href="общее/css/dividers.css" />
+<link rel="stylesheet" href="общее/css/effects.css" />
+<link rel="stylesheet" href="общее/css/ui.css" />
+<link rel="stylesheet" href="общее/css/ui-plus.css" />
+<link rel="stylesheet" href="theme.css" />
+</head>
+<body data-page="каталог">
+
+<a class="skip-link" href="#main">К содержанию</a>
+<header class="header">
+  <div class="container header__row">
+    <a class="logo logo--img" href="index.html" aria-label="МосЭплТорг — на главную">
+      <img src="assets/logo-black.webp" alt="МосЭплТорг" width="640" height="281" />
+    </a>
+
+    <nav class="nav">
+      <a href="index.html">Главная</a>
+      <a href="каталог.html" aria-current="page">Каталог</a>
+      <a href="trade-in.html">Trade-in</a>
+      <a href="доставка.html">Доставка</a>
+      <a href="контакты.html">Контакты</a>
+    </nav>
+
+    <a class="header__phone" href="tel:+79936950500">+7 (993) 695-05-00</a>
+
+    <a class="cart-btn btn btn--ghost compare-btn" href="сравнение.html" aria-label="Сравнение товаров">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+      <span class="btn__text">Сравнение</span> <span class="cart-btn__count" data-compare-count style="display: none">0</span>
+    </a>
+
+    <button class="cart-btn btn btn--ghost" data-cart-open>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 10a4 4 0 0 1-8 0"/><path d="M3.103 6.034h17.794"/><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"/></svg>
+      <span class="btn__text">Корзина</span> <span class="cart-btn__count" data-cart-count style="display: none">0</span>
+    </button>
+
+    <button class="burger" aria-label="Открыть меню">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="section">
+  <div class="container">
+    <p class="eyebrow" data-reveal>Каталог</p>
+    <h1 class="section-title" data-reveal>Что есть в наличии</h1>
+    <p class="section-lead" data-reveal>
+      Цены актуальны на сегодня, наличие меняется в течение дня — перед поездкой
+      напишите менеджеру
+      <a class="accent-text" href="https://t.me/appletorg_manager" rel="noopener" target="_blank">@appletorg_manager</a>,
+      он подтвердит за пару минут. Больше позиций — по запросу.
+    </p>
+
+    <button class="btn btn--primary facets__toggle" type="button" data-facets-toggle aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+      Фильтры
+    </button>
+
+    <!-- Фильтр и карточки собирает собрать-каталог.py из товары.json,
+         кусок перезаписывается целиком:
+             python собрать-каталог.py
+             python инструменты/собрать.py --проект .  -->
+    <!-- Собрано собрать-каталог.py из товары.json. Руками не править. -->
+    <div class="catalog" data-catalog>
+      <aside class="facets" data-facets>
+        <form class="facets__box" onsubmit="return false">
+
+          <fieldset class="facets__group">
+            <legend>Цена, ₽</legend>
+            <div class="facets__price">
+              <input class="input" type="number" inputmode="numeric" placeholder="от" aria-label="Цена от" data-price-min min="0" />
+              <input class="input" type="number" inputmode="numeric" placeholder="до" aria-label="Цена до" data-price-max min="0" />
+            </div>
+            <p class="facets__hint">В каталоге от 2 290 ₽ до 189 990 ₽</p>
+          </fieldset>
+
+          <fieldset class="facets__group">
+            <legend>Какая техника</legend>
+          <label class="facet"><input type="checkbox" data-facet="type" value="smartphones" /><span>Смартфоны</span><b>15</b></label>
+          <label class="facet"><input type="checkbox" data-facet="type" value="tablets" /><span>Планшеты</span><b>6</b></label>
+          <label class="facet"><input type="checkbox" data-facet="type" value="laptops" /><span>Ноутбуки</span><b>3</b></label>
+          <label class="facet"><input type="checkbox" data-facet="type" value="watch" /><span>Часы</span><b>4</b></label>
+          <label class="facet"><input type="checkbox" data-facet="type" value="audio" /><span>Наушники</span><b>3</b></label>
+          <label class="facet"><input type="checkbox" data-facet="type" value="cameras" /><span>Камеры</span><b>5</b></label>
+          <label class="facet"><input type="checkbox" data-facet="type" value="gadgets" /><span>Гаджеты</span><b>1</b></label>
+          <label class="facet"><input type="checkbox" data-facet="type" value="accessories" /><span>Аксессуары</span><b>3</b></label>
+          </fieldset>
+
+          <fieldset class="facets__group">
+            <legend>Производитель</legend>
+          <label class="facet"><input type="checkbox" data-facet="brand" value="Apple" /><span>Apple</span><b>32</b></label>
+          <label class="facet"><input type="checkbox" data-facet="brand" value="DJI" /><span>DJI</span><b>3</b></label>
+          <label class="facet"><input type="checkbox" data-facet="brand" value="Canon" /><span>Canon</span><b>1</b></label>
+          <label class="facet"><input type="checkbox" data-facet="brand" value="Garmin" /><span>Garmin</span><b>1</b></label>
+          <label class="facet"><input type="checkbox" data-facet="brand" value="GoPro" /><span>GoPro</span><b>1</b></label>
+          <label class="facet"><input type="checkbox" data-facet="brand" value="Honor" /><span>Honor</span><b>1</b></label>
+          <label class="facet"><input type="checkbox" data-facet="brand" value="Insta360" /><span>Insta360</span><b>1</b></label>
+          </fieldset>
+
+          <fieldset class="facets__group">
+            <legend>Состояние</legend>
+          <label class="facet"><input type="checkbox" data-facet="state" value="новая" /><span>Новая</span><b>36</b></label>
+          <label class="facet"><input type="checkbox" data-facet="state" value="бу" /><span>Б/У</span><b>4</b></label>
+          </fieldset>
+
+          <button class="btn btn--ghost btn--wide" type="button" data-facets-reset>Сбросить фильтры</button>
+        </form>
+      </aside>
+
+      <div class="catalog__main">
+        <p class="catalog__count muted" data-catalog-count></p>
+        <div class="grid grid--3" data-catalog-grid>
+      <article class="card product catalog__card"
+               data-id="ip17pm" data-name="iPhone 17 Pro Max" data-price="189990" data-img="assets/products/ip17pm-1.webp"
+               data-type="smartphones" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/ip17pm-1-min.webp" alt="iPhone 17 Pro Max" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/ip17pm-1.webp|assets/products/ip17pm-2.webp|assets/products/ip17pm-3.webp|assets/products/ip17pm-4.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-ip17pm.html"><span class="product__name">iPhone 17 Pro Max</span></a>
+        <p class="muted" style="font-size: 0.9rem">Предзаказ, две физические SIM. Запечатан, не активирован.</p>
+        <div class="product__row">
+          <span class="product__price">от 189 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="honor-robot" data-name="Honor Robot Phone 12/512" data-price="159990" data-img="assets/products/honor-robot-1.webp"
+               data-type="smartphones" data-brand="Honor" data-state="новая">
+        <img class="product__photo" src="assets/products/honor-robot-1-min.webp" alt="Honor Robot Phone 12/512" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/honor-robot-1.webp|assets/products/honor-robot-2.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-honor-robot.html"><span class="product__name">Honor Robot Phone 12/512</span></a>
+        <p class="muted" style="font-size: 0.9rem">Moon Shadow Gray. Версия 16/1 ТБ — 197 990 ₽.</p>
+        <div class="product__row">
+          <span class="product__price">159 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="ip16pm" data-name="iPhone 16 Pro Max" data-price="105990" data-img="assets/products/ip16pm-1.webp"
+               data-type="smartphones" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/ip16pm-1-min.webp" alt="iPhone 16 Pro Max" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/ip16pm-1.webp|assets/products/ip16pm-2.webp|assets/products/ip16pm-3.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-ip16pm.html"><span class="product__name">iPhone 16 Pro Max</span></a>
+        <p class="muted" style="font-size: 0.9rem">SIM + eSIM. Новый, не активирован, гарантия месяц.</p>
+        <div class="product__row">
+          <span class="product__price">от 105 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="ip15pm" data-name="iPhone 15 Pro Max" data-price="97990" data-img="assets/products/ip15pm-1.webp"
+               data-type="smartphones" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/ip15pm-1-min.webp" alt="iPhone 15 Pro Max" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/ip15pm-1.webp|assets/products/ip15pm-2.webp|assets/products/ip15pm-3.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-ip15pm.html"><span class="product__name">iPhone 15 Pro Max</span></a>
+        <p class="muted" style="font-size: 0.9rem">Титан, зум 5×. SIM + eSIM или две SIM.</p>
+        <div class="product__row">
+          <span class="product__price">от 97 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="ip16p" data-name="iPhone 16 Pro" data-price="87990" data-img="assets/products/ip16p-1.webp"
+               data-type="smartphones" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/ip16p-1-min.webp" alt="iPhone 16 Pro" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/ip16p-1.webp|assets/products/ip16p-2.webp|assets/products/ip16p-3.webp|assets/products/ip16p-4.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-ip16p.html"><span class="product__name">iPhone 16 Pro</span></a>
+        <p class="muted" style="font-size: 0.9rem">SIM + eSIM или две SIM — уточните при заказе.</p>
+        <div class="product__row">
+          <span class="product__price">от 87 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="ip15p" data-name="iPhone 15 Pro" data-price="82990" data-img="assets/products/ip15p-1.webp"
+               data-type="smartphones" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/ip15p-1-min.webp" alt="iPhone 15 Pro" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/ip15p-1.webp|assets/products/ip15p-2.webp|assets/products/ip15p-3.webp|assets/products/ip15p-4.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-ip15p.html"><span class="product__name">iPhone 15 Pro</span></a>
+        <p class="muted" style="font-size: 0.9rem">Титан, USB-C. SIM + eSIM или две SIM.</p>
+        <div class="product__row">
+          <span class="product__price">от 82 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="ip16plus" data-name="iPhone 16 Plus" data-price="74990" data-img="assets/products/ip16plus-1.webp"
+               data-type="smartphones" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/ip16plus-1-min.webp" alt="iPhone 16 Plus" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/ip16plus-1.webp|assets/products/ip16plus-2.webp|assets/products/ip16plus-3.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-ip16plus.html"><span class="product__name">iPhone 16 Plus</span></a>
+        <p class="muted" style="font-size: 0.9rem">Большой экран без переплаты за Pro. SIM + eSIM.</p>
+        <div class="product__row">
+          <span class="product__price">от 74 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="ip16" data-name="iPhone 16" data-price="66990" data-img="assets/products/ip16-1.webp"
+               data-type="smartphones" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/ip16-1-min.webp" alt="iPhone 16" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/ip16-1.webp|assets/products/ip16-2.webp|assets/products/ip16-3.webp|assets/products/ip16-4.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-ip16.html"><span class="product__name">iPhone 16</span></a>
+        <p class="muted" style="font-size: 0.9rem">Самая ходовая модель. SIM + eSIM, новый.</p>
+        <div class="product__row">
+          <span class="product__price">от 66 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="ip15plus" data-name="iPhone 15 Plus" data-price="66990" data-img="assets/products/ip15plus-1.webp"
+               data-type="smartphones" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/ip15plus-1-min.webp" alt="iPhone 15 Plus" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/ip15plus-1.webp|assets/products/ip15plus-2.webp|assets/products/ip15plus-3.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-ip15plus.html"><span class="product__name">iPhone 15 Plus</span></a>
+        <p class="muted" style="font-size: 0.9rem">6,7 дюйма и два дня автономности.</p>
+        <div class="product__row">
+          <span class="product__price">от 66 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="ip15" data-name="iPhone 15" data-price="59990" data-img="assets/products/ip15-1.webp"
+               data-type="smartphones" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/ip15-1-min.webp" alt="iPhone 15" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/ip15-1.webp|assets/products/ip15-2.webp|assets/products/ip15-3.webp|assets/products/ip15-4.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-ip15.html"><span class="product__name">iPhone 15</span></a>
+        <p class="muted" style="font-size: 0.9rem">Динамический остров и USB-C по цене прошлого поколения.</p>
+        <div class="product__row">
+          <span class="product__price">59 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="ip16e" data-name="iPhone 16E" data-price="51990" data-img="assets/ph-product.svg"
+               data-type="smartphones" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/ph-product.svg" alt="iPhone 16E" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/ph-product.svg" tabindex="0" role="button" />
+        <a class="product__link" href="товар-ip16e.html"><span class="product__name">iPhone 16E</span></a>
+        <p class="muted" style="font-size: 0.9rem">Младший iPhone на свежем процессоре. SIM + eSIM, новый.</p>
+        <div class="product__row">
+          <span class="product__price">от 51 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="bu-16pm-512" data-name="iPhone 16 Pro Max 512 ГБ Desert · б/у" data-price="69990" data-img="assets/products/bu-16pm-512-1.webp"
+               data-type="smartphones" data-brand="Apple" data-state="бу">
+        <span class="product__tag">−44 %</span>
+        <img class="product__photo" src="assets/products/bu-16pm-512-1-min.webp" alt="iPhone 16 Pro Max 512 ГБ Desert · б/у" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/bu-16pm-512-1.webp|assets/products/bu-16pm-512-2.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-bu-16pm-512.html"><span class="product__name">iPhone 16 Pro Max 512 ГБ Desert · б/у</span></a>
+        <p class="muted" style="font-size: 0.9rem">Отличное состояние, несколько мелких царапин на дисплее. Аккумулятор 100 % (132 цикла), коробка и кабель.</p>
+        <div class="product__row">
+          <span class="product__price">69 990 ₽<span class="product__old">124 990 ₽</span></span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="bu-14pm-256" data-name="iPhone 14 Pro Max 256 ГБ Purple · б/у" data-price="38990" data-img="assets/products/bu-14pm-256-1.webp"
+               data-type="smartphones" data-brand="Apple" data-state="бу">
+        <span class="product__tag">−48 %</span>
+        <img class="product__photo" src="assets/products/bu-14pm-256-1-min.webp" alt="iPhone 14 Pro Max 256 ГБ Purple · б/у" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/bu-14pm-256-1.webp|assets/products/bu-14pm-256-2.webp|assets/products/bu-14pm-256-3.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-bu-14pm-256.html"><span class="product__name">iPhone 14 Pro Max 256 ГБ Purple · б/у</span></a>
+        <p class="muted" style="font-size: 0.9rem">Отличное состояние, царапины на дисплее. Аккумулятор 78 %, коробка в комплекте.</p>
+        <div class="product__row">
+          <span class="product__price">38 990 ₽<span class="product__old">74 990 ₽</span></span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="bu-14p-256" data-name="iPhone 14 Pro 256 ГБ Silver · б/у" data-price="33990" data-img="assets/products/bu-14p-256-1.webp"
+               data-type="smartphones" data-brand="Apple" data-state="бу">
+        <span class="product__tag">−48 %</span>
+        <img class="product__photo" src="assets/products/bu-14p-256-1-min.webp" alt="iPhone 14 Pro 256 ГБ Silver · б/у" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/bu-14p-256-1.webp|assets/products/bu-14p-256-2.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-bu-14p-256.html"><span class="product__name">iPhone 14 Pro 256 ГБ Silver · б/у</span></a>
+        <p class="muted" style="font-size: 0.9rem">Хорошее состояние, менялось заднее стекло. Аккумулятор 76 %, коробка и кабель.</p>
+        <div class="product__row">
+          <span class="product__price">33 990 ₽<span class="product__old">64 990 ₽</span></span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="bu-13pm-256" data-name="iPhone 13 Pro Max 256 ГБ Green · б/у" data-price="24990" data-img="assets/ph-product.svg"
+               data-type="smartphones" data-brand="Apple" data-state="бу">
+        <span class="product__tag">−55 %</span>
+        <img class="product__photo" src="assets/ph-product.svg" alt="iPhone 13 Pro Max 256 ГБ Green · б/у" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/ph-product.svg" tabindex="0" role="button" />
+        <a class="product__link" href="товар-bu-13pm-256.html"><span class="product__name">iPhone 13 Pro Max 256 ГБ Green · б/у</span></a>
+        <p class="muted" style="font-size: 0.9rem">Дисплей без царапин, потёртости на корпусе. Аккумулятор 89 %, менялись дисплей и заднее стекло.</p>
+        <div class="product__row">
+          <span class="product__price">24 990 ₽<span class="product__old">54 990 ₽</span></span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="ipadpro11" data-name="iPad Pro 11 M4 Wi-Fi" data-price="87990" data-img="assets/products/ipadpro11-1.webp"
+               data-type="tablets" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/ipadpro11-1-min.webp" alt="iPad Pro 11 M4 Wi-Fi" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/ipadpro11-1.webp|assets/products/ipadpro11-2.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-ipadpro11.html"><span class="product__name">iPad Pro 11 M4 Wi-Fi</span></a>
+        <p class="muted" style="font-size: 0.9rem">Экран Ultra Retina XDR, поддержка Apple Pencil Pro.</p>
+        <div class="product__row">
+          <span class="product__price">от 87 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="ipadair13" data-name="iPad Air 13 M3 Wi-Fi" data-price="75990" data-img="assets/products/ipadair13-1.webp"
+               data-type="tablets" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/ipadair13-1-min.webp" alt="iPad Air 13 M3 Wi-Fi" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/ipadair13-1.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-ipadair13.html"><span class="product__name">iPad Air 13 M3 Wi-Fi</span></a>
+        <p class="muted" style="font-size: 0.9rem">Тринадцать дюймов и процессор M3. 2025 год.</p>
+        <div class="product__row">
+          <span class="product__price">от 75 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="ipadair11" data-name="iPad Air 11 M3 Wi-Fi" data-price="54990" data-img="assets/products/ipadair11-1.webp"
+               data-type="tablets" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/ipadair11-1-min.webp" alt="iPad Air 11 M3 Wi-Fi" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/ipadair11-1.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-ipadair11.html"><span class="product__name">iPad Air 11 M3 Wi-Fi</span></a>
+        <p class="muted" style="font-size: 0.9rem">2025 год. Оптимальный планшет для работы и рисования.</p>
+        <div class="product__row">
+          <span class="product__price">от 54 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="ipadmini7" data-name="iPad mini 7 128 ГБ Wi-Fi" data-price="45990" data-img="assets/products/ipadmini7-1.webp"
+               data-type="tablets" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/ipadmini7-1-min.webp" alt="iPad mini 7 128 ГБ Wi-Fi" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/ipadmini7-1.webp|assets/products/ipadmini7-2.webp|assets/products/ipadmini7-3.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-ipadmini7.html"><span class="product__name">iPad mini 7 128 ГБ Wi-Fi</span></a>
+        <p class="muted" style="font-size: 0.9rem">Помещается в карман куртки, читать и играть удобнее всего.</p>
+        <div class="product__row">
+          <span class="product__price">45 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="ipad11" data-name="iPad 11 (2025) Wi-Fi" data-price="35990" data-img="assets/products/ipad11-1.webp"
+               data-type="tablets" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/ipad11-1-min.webp" alt="iPad 11 (2025) Wi-Fi" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/ipad11-1.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-ipad11.html"><span class="product__name">iPad 11 (2025) Wi-Fi</span></a>
+        <p class="muted" style="font-size: 0.9rem">Базовый iPad для учёбы, кино и заметок.</p>
+        <div class="product__row">
+          <span class="product__price">от 35 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="ipad10" data-name="iPad 10 64 ГБ Wi-Fi" data-price="29990" data-img="assets/ph-product.svg"
+               data-type="tablets" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/ph-product.svg" alt="iPad 10 64 ГБ Wi-Fi" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/ph-product.svg" tabindex="0" role="button" />
+        <a class="product__link" href="товар-ipad10.html"><span class="product__name">iPad 10 64 ГБ Wi-Fi</span></a>
+        <p class="muted" style="font-size: 0.9rem">Самый доступный iPad в наличии.</p>
+        <div class="product__row">
+          <span class="product__price">29 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="mba15-m3" data-name="MacBook Air 15 M3 8/256" data-price="105990" data-img="assets/products/mba15-m3-1.webp"
+               data-type="laptops" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/mba15-m3-1-min.webp" alt="MacBook Air 15 M3 8/256" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/mba15-m3-1.webp|assets/products/mba15-m3-2.webp|assets/products/mba15-m3-3.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-mba15-m3.html"><span class="product__name">MacBook Air 15 M3 8/256</span></a>
+        <p class="muted" style="font-size: 0.9rem">Большой экран и шесть динамиков. Новый, не активирован.</p>
+        <div class="product__row">
+          <span class="product__price">105 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="mba13-m3" data-name="MacBook Air 13 M3 8/256" data-price="86990" data-img="assets/products/mba13-m3-1.webp"
+               data-type="laptops" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/mba13-m3-1-min.webp" alt="MacBook Air 13 M3 8/256" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/mba13-m3-1.webp|assets/products/mba13-m3-2.webp|assets/products/mba13-m3-3.webp|assets/products/mba13-m3-4.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-mba13-m3.html"><span class="product__name">MacBook Air 13 M3 8/256</span></a>
+        <p class="muted" style="font-size: 0.9rem">Новый, не активирован. Русская раскладка — уточните наличие.</p>
+        <div class="product__row">
+          <span class="product__price">86 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="mba13-m1" data-name="MacBook Air 13 M1 8/256" data-price="63990" data-img="assets/products/mba13-m1-1.webp"
+               data-type="laptops" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/mba13-m1-1-min.webp" alt="MacBook Air 13 M1 8/256" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/mba13-m1-1.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-mba13-m1.html"><span class="product__name">MacBook Air 13 M1 8/256</span></a>
+        <p class="muted" style="font-size: 0.9rem">Самый доступный Mac для учёбы и работы с документами.</p>
+        <div class="product__row">
+          <span class="product__price">63 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="aw-ultra2" data-name="Apple Watch Ultra 2 49 мм" data-price="69990" data-img="assets/products/aw-ultra2-1.webp"
+               data-type="watch" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/aw-ultra2-1-min.webp" alt="Apple Watch Ultra 2 49 мм" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/aw-ultra2-1.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-aw-ultra2.html"><span class="product__name">Apple Watch Ultra 2 49 мм</span></a>
+        <p class="muted" style="font-size: 0.9rem">Титан, 100 метров, автономность до 72 часов.</p>
+        <div class="product__row">
+          <span class="product__price">69 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="aw-s10" data-name="Apple Watch Series 10" data-price="30990" data-img="assets/products/aw-s10-1.webp"
+               data-type="watch" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/aw-s10-1-min.webp" alt="Apple Watch Series 10" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/aw-s10-1.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-aw-s10.html"><span class="product__name">Apple Watch Series 10</span></a>
+        <p class="muted" style="font-size: 0.9rem">Самый тонкий корпус и быстрая зарядка.</p>
+        <div class="product__row">
+          <span class="product__price">от 30 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="garmin-cirqa" data-name="Garmin Cirqa" data-price="34990" data-img="assets/products/garmin-cirqa-1.webp"
+               data-type="watch" data-brand="Garmin" data-state="новая">
+        <img class="product__photo" src="assets/products/garmin-cirqa-1-min.webp" alt="Garmin Cirqa" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/garmin-cirqa-1.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-garmin-cirqa.html"><span class="product__name">Garmin Cirqa</span></a>
+        <p class="muted" style="font-size: 0.9rem">Спортивные часы. Размеры S-M и L-XL, два цвета.</p>
+        <div class="product__row">
+          <span class="product__price">34 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="aw-se2" data-name="Apple Watch SE 2" data-price="18990" data-img="assets/products/aw-se2-1.webp"
+               data-type="watch" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/aw-se2-1-min.webp" alt="Apple Watch SE 2" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/aw-se2-1.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-aw-se2.html"><span class="product__name">Apple Watch SE 2</span></a>
+        <p class="muted" style="font-size: 0.9rem">Всё главное из Apple Watch за половину цены.</p>
+        <div class="product__row">
+          <span class="product__price">от 18 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="app-max" data-name="AirPods Max 2024" data-price="44990" data-img="assets/products/app-max-1.webp"
+               data-type="audio" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/app-max-1-min.webp" alt="AirPods Max 2024" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/app-max-1.webp|assets/products/app-max-2.webp|assets/products/app-max-3.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-app-max.html"><span class="product__name">AirPods Max 2024</span></a>
+        <p class="muted" style="font-size: 0.9rem">Полноразмерные, USB-C, пять цветов под заказ.</p>
+        <div class="product__row">
+          <span class="product__price">44 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="app-pro2" data-name="AirPods Pro 2" data-price="18990" data-img="assets/products/app-pro2-1.webp"
+               data-type="audio" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/app-pro2-1-min.webp" alt="AirPods Pro 2" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/app-pro2-1.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-app-pro2.html"><span class="product__name">AirPods Pro 2</span></a>
+        <p class="muted" style="font-size: 0.9rem">Активное шумоподавление и адаптивный звук.</p>
+        <div class="product__row">
+          <span class="product__price">18 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="app-4" data-name="AirPods 4" data-price="10990" data-img="assets/products/app-4-1.webp"
+               data-type="audio" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/app-4-1-min.webp" alt="AirPods 4" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/app-4-1.webp|assets/products/app-4-2.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-app-4.html"><span class="product__name">AirPods 4</span></a>
+        <p class="muted" style="font-size: 0.9rem">Без ANC — 10 990 ₽, уточните версию при заказе.</p>
+        <div class="product__row">
+          <span class="product__price">от 10 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="canon-g7x3" data-name="Canon PowerShot G7X Mark III" data-price="99990" data-img="assets/products/canon-g7x3-1.webp"
+               data-type="cameras" data-brand="Canon" data-state="новая">
+        <img class="product__photo" src="assets/products/canon-g7x3-1-min.webp" alt="Canon PowerShot G7X Mark III" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/canon-g7x3-1.webp|assets/products/canon-g7x3-2.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-canon-g7x3.html"><span class="product__name">Canon PowerShot G7X Mark III</span></a>
+        <p class="muted" style="font-size: 0.9rem">Любимая камера блогеров. Чёрный и серебристый.</p>
+        <div class="product__row">
+          <span class="product__price">99 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="insta-x6" data-name="Insta360 X6 Standard Bundle" data-price="56990" data-img="assets/products/insta-x6-1.webp"
+               data-type="cameras" data-brand="Insta360" data-state="новая">
+        <img class="product__photo" src="assets/products/insta-x6-1-min.webp" alt="Insta360 X6 Standard Bundle" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/insta-x6-1.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-insta-x6.html"><span class="product__name">Insta360 X6 Standard Bundle</span></a>
+        <p class="muted" style="font-size: 0.9rem">Панорамная съёмка 360°, кадр выбирается после записи.</p>
+        <div class="product__row">
+          <span class="product__price">56 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="gopro-m1" data-name="GoPro Mission 1" data-price="52990" data-img="assets/ph-product.svg"
+               data-type="cameras" data-brand="GoPro" data-state="новая">
+        <img class="product__photo" src="assets/ph-product.svg" alt="GoPro Mission 1" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/ph-product.svg" tabindex="0" role="button" />
+        <a class="product__link" href="товар-gopro-m1.html"><span class="product__name">GoPro Mission 1</span></a>
+        <p class="muted" style="font-size: 0.9rem">Для съёмки в движении: вело, мото, вода, снег.</p>
+        <div class="product__row">
+          <span class="product__price">52 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="dji-pocket4" data-name="DJI Osmo Pocket 4 Standard" data-price="39990" data-img="assets/products/dji-pocket4-1.webp"
+               data-type="cameras" data-brand="DJI" data-state="новая">
+        <img class="product__photo" src="assets/products/dji-pocket4-1-min.webp" alt="DJI Osmo Pocket 4 Standard" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/dji-pocket4-1.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-dji-pocket4.html"><span class="product__name">DJI Osmo Pocket 4 Standard</span></a>
+        <p class="muted" style="font-size: 0.9rem">Карманная камера со стабилизатором для влогов.</p>
+        <div class="product__row">
+          <span class="product__price">39 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="dji-action5" data-name="DJI Osmo Action 5 Pro Standard" data-price="25990" data-img="assets/products/dji-action5-1.webp"
+               data-type="cameras" data-brand="DJI" data-state="новая">
+        <img class="product__photo" src="assets/products/dji-action5-1-min.webp" alt="DJI Osmo Action 5 Pro Standard" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/dji-action5-1.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-dji-action5.html"><span class="product__name">DJI Osmo Action 5 Pro Standard</span></a>
+        <p class="muted" style="font-size: 0.9rem">Экшн-камера, съёмка под водой без бокса.</p>
+        <div class="product__row">
+          <span class="product__price">25 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="dji-mic3" data-name="DJI Mic 3 (2 TX + 1 RX)" data-price="22990" data-img="assets/products/dji-mic3-1.webp"
+               data-type="gadgets" data-brand="DJI" data-state="новая">
+        <img class="product__photo" src="assets/products/dji-mic3-1-min.webp" alt="DJI Mic 3 (2 TX + 1 RX)" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/dji-mic3-1.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-dji-mic3.html"><span class="product__name">DJI Mic 3 (2 TX + 1 RX)</span></a>
+        <p class="muted" style="font-size: 0.9rem">Два петличных микрофона с приёмником для интервью.</p>
+        <div class="product__row">
+          <span class="product__price">22 990 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="pencil-pro" data-name="Apple Pencil Pro" data-price="15490" data-img="assets/products/pencil-pro-1.webp"
+               data-type="accessories" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/pencil-pro-1-min.webp" alt="Apple Pencil Pro" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/pencil-pro-1.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-pencil-pro.html"><span class="product__name">Apple Pencil Pro</span></a>
+        <p class="muted" style="font-size: 0.9rem">Сжатие, поворот и тактильный отклик. Для iPad Pro, Air и mini.</p>
+        <div class="product__row">
+          <span class="product__price">15 490 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="pencil-2" data-name="Apple Pencil 2" data-price="11490" data-img="assets/products/pencil-2-1.webp"
+               data-type="accessories" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/pencil-2-1-min.webp" alt="Apple Pencil 2" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/pencil-2-1.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-pencil-2.html"><span class="product__name">Apple Pencil 2</span></a>
+        <p class="muted" style="font-size: 0.9rem">Магнитное крепление и беспроводная зарядка от планшета.</p>
+        <div class="product__row">
+          <span class="product__price">11 490 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+      <article class="card product catalog__card"
+               data-id="power-20w" data-name="Адаптер питания USB-C 20 Вт" data-price="2290" data-img="assets/products/power-20w-1.webp"
+               data-type="accessories" data-brand="Apple" data-state="новая">
+        <img class="product__photo" src="assets/products/power-20w-1-min.webp" alt="Адаптер питания USB-C 20 Вт" width="480" height="480" loading="lazy" decoding="async" data-zoom="assets/products/power-20w-1.webp|assets/products/power-20w-2.webp" tabindex="0" role="button" />
+        <a class="product__link" href="товар-power-20w.html"><span class="product__name">Адаптер питания USB-C 20 Вт</span></a>
+        <p class="muted" style="font-size: 0.9rem">Оригинальный блок для быстрой зарядки iPhone и iPad.</p>
+        <div class="product__row">
+          <span class="product__price">2 290 ₽</span>
+          <button class="btn btn--primary" type="button" data-add>В корзину</button>
+          <button class="btn btn--ghost product__compare" type="button" data-compare>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/></svg>
+            <span data-compare-label>К сравнению</span>
+          </button>
+        </div>
+      </article>
+        </div>
+        <p class="catalog__empty" data-catalog-empty hidden>
+          Под эти условия ничего не нашлось. Снимите часть галочек — или напишите
+          менеджеру, мы возим под заказ почти всё.
+        </p>
+      </div>
+    </div>
+
+    <p class="muted" style="margin-top: 2rem; font-size: 0.92rem">
+      Нужной конфигурации нет в списке? Мы возим под заказ почти всё: другие объёмы
+      памяти, цвета, Dyson, аксессуары. Напишите — привезём.
+    </p>
+  </div>
+</section>
+
+<!-- ================= ЗАЯВКА ================= -->
+<section class="section" id="form">
+  <div class="container">
+    <div class="formblock" data-reveal>
+      <div>
+        <p class="eyebrow">Заявка</p>
+        <h2 class="section-title">Проверим наличие и назовём итоговую цену</h2>
+        <p class="section-lead">Подтвердим наличие, назовём итоговую цену и подберём замену, если нужной конфигурации нет.</p>
+        <ul class="hero__facts" style="margin-top: 1.6rem">
+          <li>Отвечаем в рабочие часы, Ежедневно 12:00–21:00</li>
+          <li>Не звоним без вашей просьбы — пишем в мессенджер</li>
+          <li>Можно сразу спросить про Trade-in вашего устройства</li>
+        </ul>
+        <p class="muted" style="margin-top: 1.4rem">
+          Быстрее всего — написать менеджеру:
+          <a class="accent-text" href="https://t.me/appletorg_manager" rel="noopener" target="_blank">@appletorg_manager</a>
+        </p>
+      </div>
+
+      <div class="formblock__box">
+        <form data-form action="общее/send.php" method="post" novalidate>
+          <label class="field"><span>Имя *</span><input class="input" type="text" name="name" required autocomplete="name" /></label>
+          <label class="field"><span>Телефон или Телеграм *</span><input class="input" type="tel" name="contact" required autocomplete="tel" placeholder="+7 (___) ___-__-__" data-phone /></label>
+          <label class="field"><span>Что интересует</span><textarea class="textarea" name="task" rows="3" placeholder="Например: iPhone 16 Pro 256 ГБ, чёрный титан"></textarea></label>
+          <label class="field"><span>Откуда о нас узнали</span>
+            <select class="select" name="source">
+              <option value="">Не важно</option>
+              <option>Поиск</option>
+              <option>Яндекс Карты</option>
+              <option>Телеграм</option>
+              <option>Инстаграм</option>
+              <option>Посоветовали</option>
+            </select>
+          </label>
+          <div class="hp"><label>Не заполняйте это поле<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+          <label class="check"><input type="checkbox" name="agree" required /><span>Согласен на обработку персональных данных и с <a href="privacy.html" style="text-decoration: underline">политикой конфиденциальности</a></span></label>
+          <button class="btn btn--primary btn--wide" type="submit">Отправить заявку</button>
+          <p class="form__msg" role="status" aria-live="polite"></p>
+          <p class="form__note">Номер нужен только чтобы ответить. Третьим лицам не передаём.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <img class="footer__logo" src="assets/logo-black.webp" alt="МосЭплТорг" width="640" height="281" loading="lazy" decoding="async" />
+        <p class="muted">Новая и б/у техника Apple, DJI и Dyson в Москве. Trade-in, выкуп и гарантия месяц на всё.</p>
+        <div class="socials" style="margin-top: 1rem">
+          <a href="https://t.me/mosappletorg" rel="noopener" target="_blank" aria-label="Телеграм-канал МосЭплТорг">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M23.1117 4.49449C23.4296 2.94472 21.9074 1.65683 20.4317 2.227L2.3425 9.21601C0.694517 9.85273 0.621087 12.1572 2.22518 12.8975L6.1645 14.7157L8.03849 21.2746C8.13583 21.6153 8.40618 21.8791 8.74917 21.968C9.09216 22.0568 9.45658 21.9576 9.70712 21.707L12.5938 18.8203L16.6375 21.8531C17.8113 22.7334 19.5019 22.0922 19.7967 20.6549L23.1117 4.49449ZM3.0633 11.0816L21.1525 4.0926L17.8375 20.2531L13.1 16.6999C12.7019 16.4013 12.1448 16.4409 11.7929 16.7928L10.5565 18.0292L10.928 15.9861L18.2071 8.70703C18.5614 8.35278 18.5988 7.79106 18.2947 7.39293C17.9906 6.99479 17.4389 6.88312 17.0039 7.13168L6.95124 12.876L3.0633 11.0816ZM8.17695 14.4791L8.78333 16.6015L9.01614 15.321C9.05253 15.1209 9.14908 14.9366 9.29291 14.7928L11.5128 12.573L8.17695 14.4791Z"/></svg>
+          </a>
+          <a href="https://instagram.com/mos.appletorg" rel="noopener" target="_blank" aria-label="Инстаграм МосЭплТорг">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z"/><path d="M18 5C17.4477 5 17 5.44772 17 6C17 6.55228 17.4477 7 18 7C18.5523 7 19 6.55228 19 6C19 5.44772 18.5523 5 18 5Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M1.65396 4.27606C1 5.55953 1 7.23969 1 10.6V13.4C1 16.7603 1 18.4405 1.65396 19.7239C2.2292 20.8529 3.14708 21.7708 4.27606 22.346C5.55953 23 7.23969 23 10.6 23H13.4C16.7603 23 18.4405 23 19.7239 22.346C20.8529 21.7708 21.7708 20.8529 22.346 19.7239C23 18.4405 23 16.7603 23 13.4V10.6C23 7.23969 23 5.55953 22.346 4.27606C21.7708 3.14708 20.8529 2.2292 19.7239 1.65396C18.4405 1 16.7603 1 13.4 1H10.6C7.23969 1 5.55953 1 4.27606 1.65396C3.14708 2.2292 2.2292 3.14708 1.65396 4.27606ZM13.4 3H10.6C8.88684 3 7.72225 3.00156 6.82208 3.0751C5.94524 3.14674 5.49684 3.27659 5.18404 3.43597C4.43139 3.81947 3.81947 4.43139 3.43597 5.18404C3.27659 5.49684 3.14674 5.94524 3.0751 6.82208C3.00156 7.72225 3 8.88684 3 10.6V13.4C3 15.1132 3.00156 16.2777 3.0751 17.1779C3.14674 18.0548 3.27659 18.5032 3.43597 18.816C3.81947 19.5686 4.43139 20.1805 5.18404 20.564C5.49684 20.7234 5.94524 20.8533 6.82208 20.9249C7.72225 20.9984 8.88684 21 10.6 21H13.4C15.1132 21 16.2777 20.9984 17.1779 20.9249C18.0548 20.8533 18.5032 20.7234 18.816 20.564C19.5686 20.1805 20.1805 19.5686 20.564 18.816C20.7234 18.5032 20.8533 18.0548 20.9249 17.1779C20.9984 16.2777 21 15.1132 21 13.4V10.6C21 8.88684 20.9984 7.72225 20.9249 6.82208C20.8533 5.94524 20.7234 5.49684 20.564 5.18404C20.1805 4.43139 19.5686 3.81947 18.816 3.43597C18.5032 3.27659 18.0548 3.14674 17.1779 3.0751C16.2777 3.00156 15.1132 3 13.4 3Z"/></svg>
+          </a>
+          <a href="tel:+79936950500" aria-label="Позвонить в магазин">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="font-size: 1rem; margin-bottom: 0.8rem">Разделы</h3>
+        <p class="muted">
+          <a href="каталог.html" aria-current="page">Каталог</a><br />
+          <a href="сравнение.html">Сравнение</a><br />
+          <a href="trade-in.html">Trade-in и выкуп</a><br />
+          <a href="доставка.html">Доставка и оплата</a><br />
+          <a href="контакты.html">Контакты</a>
+        </p>
+      </div>
+
+      <div>
+        <h3 style="font-size: 1rem; margin-bottom: 0.8rem">Каталог</h3>
+        <p class="muted">
+          <a href="каталог.html#smartphones" aria-current="page">iPhone</a><br />
+          <a href="каталог.html#tablets" aria-current="page">iPad и Mac</a><br />
+          <a href="каталог.html#watch" aria-current="page">Watch и AirPods</a><br />
+          <a href="каталог.html#бу" aria-current="page">Б/У с гарантией</a>
+        </p>
+      </div>
+
+      <div>
+        <h3 style="font-size: 1rem; margin-bottom: 0.8rem">Магазин</h3>
+        <p class="muted">
+          <a href="tel:+79936950500">+7 (993) 695-05-00</a><br />
+          <a href="https://t.me/appletorg_manager" rel="noopener" target="_blank">Менеджер в Телеграме</a><br />
+          Москва, Нижняя Красносельская ул., 40/12к21, подъезд 2, этаж 2, помещение 207<br />
+          м. Бауманская, Ежедневно 12:00–21:00
+        </p>
+      </div>
+    </div>
+
+    <div class="footer__legal">
+      <span>© <span data-year></span> МосЭплТорг</span>
+      <a href="privacy.html">Политика конфиденциальности</a>
+      <span>Здесь будут ваши ИП Фамилия И. О., ИНН, ОГРНИП</span>
+      <span>Сделано в <a href="https://decidio.ru" rel="noopener">Decidio</a></span>
+    </div>
+
+    <p class="footer__note muted">
+      Apple, iPhone, iPad, MacBook и Apple Watch — товарные знаки Apple Inc.
+      МосЭплТорг не является авторизованным реселлером Apple.
+    </p>
+  </div>
+</footer>
+<!-- ================= КОРЗИНА ================= -->
+<div class="cart-overlay" data-cart-close></div>
+<aside class="cart-panel" aria-label="Корзина">
+  <div class="cart-panel__head">
+    <h3>Корзина</h3>
+    <button type="button" data-cart-close aria-label="Закрыть корзину" style="width: 44px; height: 44px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" style="width:24px;height:24px"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+
+  <div class="cart-panel__body"></div>
+
+  <form class="cart-panel__foot" data-form action="общее/send.php" method="post" novalidate>
+    <div class="cart-total"><span class="muted">Итого</span><b data-cart-total>0 ₽</b></div>
+    <input type="hidden" name="task" data-cart-field />
+    <label class="field"><span>Имя *</span><input class="input" type="text" name="name" required autocomplete="name" /></label>
+    <label class="field"><span>Телефон *</span><input class="input" type="tel" name="contact" required autocomplete="tel" placeholder="+7 (___) ___-__-__" data-phone /></label>
+    <div class="hp"><label>Не заполняйте это поле<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+    <label class="check"><input type="checkbox" name="agree" required /><span>Согласен на обработку персональных данных и с <a href="privacy.html" style="text-decoration: underline">политикой конфиденциальности</a></span></label>
+    <button class="btn btn--primary btn--wide" type="submit">Оформить заказ</button>
+    <p class="form__msg" role="status" aria-live="polite"></p>
+    <p class="form__note" style="margin-top: 0.6rem">Подтвердим наличие, согласуем доставку и способ оплаты.</p>
+    <a class="btn btn--ghost btn--wide" style="margin-top: 0.6rem" href="https://t.me/appletorg_manager" rel="noopener" target="_blank">Спросить в Телеграме</a>
+  </form>
+</aside>
+
+<div class="callbar">
+  <button class="btn btn--primary" type="button" data-cart-open>Корзина <span class="cart-btn__count" data-cart-count style="display: none">0</span></button>
+  <a class="btn btn--ghost" href="tel:+79936950500">Позвонить</a>
+</div>
+
+<script>
+  /* Фильтр каталога: цена «от/до» и галочки по типу, бренду и состоянию.
+     Внутри группы условия складываются («смартфоны ИЛИ планшеты»),
+     между группами — умножаются («смартфоны И Apple И б/у») — так это
+     работает во всех магазинах, к которым покупатель привык.
+     Запуск отложен на window.load: к этому моменту разметка уже собрана. */
+  (function () {
+    function завести() {
+      var корень = document.querySelector("[data-catalog]");
+      if (!корень) return;
+
+      var карточки = [].slice.call(корень.querySelectorAll(".catalog__card"));
+      var галочки = [].slice.call(корень.querySelectorAll("[data-facet]"));
+      var мин = корень.querySelector("[data-price-min]");
+      var макс = корень.querySelector("[data-price-max]");
+      var счётчик = корень.querySelector("[data-catalog-count]");
+      var пусто = корень.querySelector("[data-catalog-empty]");
+      var сброс = корень.querySelector("[data-facets-reset]");
+      var панель = корень.querySelector("[data-facets]");
+      var кнопка = document.querySelector("[data-facets-toggle]");
+
+      function выбрано(поле) {
+        return галочки.filter(function (г) {
+          return г.dataset.facet === поле && г.checked;
+        }).map(function (г) { return г.value; });
+      }
+
+      function число(поле) {
+        var v = parseInt(поле.value, 10);
+        return isNaN(v) ? null : v;
+      }
+
+      function слово(н) {
+        var сто = н % 100, десять = н % 10;
+        if (сто > 10 && сто < 20) return "товаров";
+        if (десять === 1) return "товар";
+        if (десять > 1 && десять < 5) return "товара";
+        return "товаров";
+      }
+
+      function пересчитать() {
+        var типы = выбрано("type"), бренды = выбрано("brand"), состояния = выбрано("state");
+        var от = число(мин), до = число(макс);
+        var видно = 0;
+
+        карточки.forEach(function (к) {
+          var цена = parseInt(к.dataset.price, 10);
+          var годится =
+            (!типы.length || типы.indexOf(к.dataset.type) > -1) &&
+            (!бренды.length || бренды.indexOf(к.dataset.brand) > -1) &&
+            (!состояния.length || состояния.indexOf(к.dataset.state) > -1) &&
+            (от === null || цена >= от) &&
+            (до === null || цена <= до);
+          к.hidden = !годится;
+          if (годится) видно++;
+        });
+
+        счётчик.textContent = видно + " " + слово(видно) + " из " + карточки.length;
+        пусто.hidden = видно > 0;
+      }
+
+      галочки.forEach(function (г) { г.addEventListener("change", пересчитать); });
+      [мин, макс].forEach(function (п) { п.addEventListener("input", пересчитать); });
+
+      сброс.addEventListener("click", function () {
+        галочки.forEach(function (г) { г.checked = false; });
+        мин.value = ""; макс.value = "";
+        пересчитать();
+      });
+
+      /* На телефоне панель выезжает слева поверх страницы. Затемнение
+         добавляем скриптом: в разметке ему делать нечего. */
+      if (кнопка) {
+        var шторка = document.createElement("div");
+        шторка.className = "facets__shade";
+        панель.appendChild(шторка);
+
+        function переключить_панель(открыть) {
+          панель.classList.toggle("is-open", открыть);
+          кнопка.setAttribute("aria-expanded", открыть ? "true" : "false");
+          document.body.style.overflow = открыть ? "hidden" : "";
+        }
+        кнопка.addEventListener("click", function () {
+          переключить_панель(!панель.classList.contains("is-open"));
+        });
+        шторка.addEventListener("click", function () { переключить_панель(false); });
+        document.addEventListener("keydown", function (е) {
+          if (е.key === "Escape") переключить_панель(false);
+        });
+        // выбрали фильтр — можно сразу смотреть результат
+        сброс.addEventListener("click", function () { переключить_панель(false); });
+      }
+
+      /* Ссылки с главной вида каталог.html#smartphones сразу ставят галочку. */
+      function из_адреса() {
+        var метка = decodeURIComponent(location.hash.replace("#", ""));
+        if (!метка) return;
+        var г = галочки.filter(function (г) { return г.value === метка; })[0];
+        if (г) { г.checked = true; пересчитать(); корень.scrollIntoView({ block: "start" }); }
+      }
+
+      пересчитать();
+      из_адреса();
+      window.addEventListener("hashchange", из_адреса);
+    }
+    window.addEventListener("load", завести);
+  })();
+</script>
+
+<script src="общее/js/effects.js"></script>
+<script src="общее/js/строка.js"></script>
+<script src="общее/js/ui-plus.js"></script>  <!-- маска телефона, «наверх», лайтбокс -->
+<script src="общее/js/cart.js"></script>
+<script src="общее/js/compare.js"></script>
+<script src="общее/js/gallery.js"></script>
+<script src="общее/js/просмотр.js"></script>
+<script src="общее/js/варианты.js"></script>
+<script src="общее/js/лента.js"></script>
+<script src="общее/js/баннеры.js"></script>
+<script src="общее/js/demo.js"></script>   <!-- МАКЕТ: убрать при сдаче -->
+<script src="общее/js/form.js"></script>
+<script src="общее/js/cookie.js"></script>
+</body>
+</html>

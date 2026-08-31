@@ -1,0 +1,30 @@
+<!-- ================= КОРЗИНА ================= -->
+<div class="cart-overlay" data-cart-close></div>
+<aside class="cart-panel" aria-label="Корзина">
+  <div class="cart-panel__head">
+    <h3>Корзина</h3>
+    <button type="button" data-cart-close aria-label="Закрыть корзину" style="width: 44px; height: 44px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" style="width:24px;height:24px"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+
+  <div class="cart-panel__body"></div>
+
+  <form class="cart-panel__foot" data-form action="общее/send.php" method="post" novalidate>
+    <div class="cart-total"><span class="muted">Итого</span><b data-cart-total>0 ₽</b></div>
+    <input type="hidden" name="task" data-cart-field />
+    <label class="field"><span>Имя *</span><input class="input" type="text" name="name" required autocomplete="name" /></label>
+    <label class="field"><span>Телефон *</span><input class="input" type="tel" name="contact" required autocomplete="tel" placeholder="+7 (___) ___-__-__" data-phone /></label>
+    <div class="hp"><label>Не заполняйте это поле<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+    <label class="check"><input type="checkbox" name="agree" required /><span>Согласен на обработку персональных данных и с <a href="privacy.html" style="text-decoration: underline">политикой конфиденциальности</a></span></label>
+    <button class="btn btn--primary btn--wide" type="submit">Оформить заказ</button>
+    <p class="form__msg" role="status" aria-live="polite"></p>
+    <p class="form__note" style="margin-top: 0.6rem">Подтвердим наличие, согласуем доставку и способ оплаты.</p>
+    <a class="btn btn--ghost btn--wide" style="margin-top: 0.6rem" href="{{телеграм_менеджер}}" rel="noopener" target="_blank">Спросить в Телеграме</a>
+  </form>
+</aside>
+
+<div class="callbar">
+  <button class="btn btn--primary" type="button" data-cart-open>Корзина <span class="cart-btn__count" data-cart-count style="display: none">0</span></button>
+  <a class="btn btn--ghost" href="tel:{{телефон_ссылкой}}">Позвонить</a>
+</div>

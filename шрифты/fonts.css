@@ -1,0 +1,17 @@
+/* Шрифты заготовок Decidio.
+   Все файлы — woff2, обрезаны до кириллицы и латиницы, лежат в woff2/.
+   В этом макете нужны только Manrope и Inter — остальные удалены,
+   чтобы не заливать на хостинг лишние 370 КБ.
+   Подключать так:  <link rel="stylesheet" href="fonts.css">
+   Пары под ниши — в конце файла. */
+
+@font-face {
+  font-family: "Inter";
+  src: url("woff2/inter-var.woff2") format("woff2-variations");
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("woff2/manrope-var.woff2") format("woff2-variations");
+  font-weight: 200 800; font-style: normal; font-display: swap;
+}

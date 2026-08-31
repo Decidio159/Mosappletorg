@@ -1,0 +1,235 @@
+/* =========================================================
+   БАЗА КАРКАСОВ — токены, сброс, раскладка, типографика,
+   шапка, кнопки, формы, подвал.
+   Тема ниши переопределяет только переменные в theme.css.
+   ========================================================= */
+
+@import url("../../шрифты/fonts.css");
+
+:root {
+  /* ---- Палитра (светлая по умолчанию; тема ниши перекрывает) ---- */
+  --bg:            #ffffff;
+  --bg-soft:       #f6f7f9;
+  --bg-elevated:   #ffffff;
+  --surface:       #f1f3f6;
+  --border:        rgba(16, 18, 24, 0.10);
+  --border-strong: rgba(16, 18, 24, 0.20);
+
+  --text:          #14161c;
+  --text-muted:    #4b5160;
+  --text-dim:      #6b7280;
+
+  --accent:        #1f6feb;   /* основной акцент — кнопки, ссылки */
+  --accent-deep:   #14509f;   /* заливка под белый текст */
+  --accent-2:      #4da6f0;   /* мелкие акценты, свечение */
+  --warm:          #a57865;
+  --danger:        #c0392b;
+  --ok:            #1e8e4e;
+
+  --on-accent:     #ffffff;   /* текст на акцентной заливке */
+  --gradient:      linear-gradient(120deg, var(--accent-deep), var(--accent));
+  --gradient-text: linear-gradient(120deg, var(--accent), var(--accent-2));
+
+  /* ---- Типографика (пара шрифтов задаётся в theme.css) ---- */
+  --fs-hero:  clamp(2.2rem, 5.4vw, 4.2rem);
+  --fs-h2:    clamp(1.7rem, 3.6vw, 2.8rem);
+  --fs-h3:    clamp(1.2rem, 2vw, 1.5rem);
+  --fs-body:  1.05rem;
+  --lh:       1.6;
+  --head-weight: 700;
+  --head-spacing: -0.02em;
+
+  /* ---- Ритм ---- */
+  --maxw:      1200px;
+  --gutter:    clamp(1.1rem, 4vw, 2.5rem);
+  --section-y: clamp(3.5rem, 8vw, 7rem);
+  --radius:    18px;
+  --radius-sm: 12px;
+  --radius-pill: 999px;
+
+  /* ---- Движение и тени ---- */
+  --ease:   cubic-bezier(0.22, 1, 0.36, 1);
+  --dur:    0.6s;
+  --shadow: 0 20px 50px -22px rgba(16, 18, 24, 0.35);
+  --shadow-sm: 0 6px 20px -10px rgba(16, 18, 24, 0.3);
+}
+
+/* ---------- Сброс ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-text);
+  font-size: var(--fs-body);
+  line-height: var(--lh);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img, video, svg { max-width: 100%; display: block; }
+img { height: auto; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+/* ---------- Раскладка ---------- */
+.container { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+.section { padding-block: var(--section-y); position: relative; }
+.section--soft { background: var(--bg-soft); }
+.grid { display: grid; gap: clamp(1rem, 2.5vw, 1.8rem); }
+/* min() обязателен: без него на экране 320 px минимальная ширина колонки
+   больше самой колонки и карточки вылезают за контейнер. */
+.grid--2 { grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); }
+.grid--3 { grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); }
+.grid--4 { grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); }
+
+/* ---------- Типографика ---------- */
+h1, h2, h3, h4, .h {
+  /* Длинные русские слова («конфиденциальности») при крупном кегле не влезают
+     в 320–375 px и дают горизонтальную прокрутку. От прокрутки спасает уже
+     сам `overflow-wrap`: он рвёт слово, только если оно не помещается.
+     `hyphens: auto` — лишь косметика поверх, и на широком экране она вредна:
+     первый экран получал «Кухня, к кото-рой не спешат». Поэтому переносы
+     включаем только на узких экранах, где они действительно нужны. */
+  overflow-wrap: break-word;
+  hyphens: manual;
+  font-family: var(--font-head);
+  font-weight: var(--head-weight);
+  letter-spacing: var(--head-spacing);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+h1 { font-size: var(--fs-hero); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+
+/* Переносы по слогам — только там, где строка правда не вмещает слово. */
+@media (max-width: 480px) {
+  h1, h2, h3, h4, .h { hyphens: auto; }
+}
+
+.eyebrow {
+  font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase;
+  /* Мелкая надпись капсом идёт --accent-deep: светлый --accent на фоне ниши
+     давал 3,9:1 вместо 4,5:1 в пяти темах из восьми. */
+  color: var(--accent-deep); font-weight: 600; margin-bottom: 0.8rem;
+}
+.section-title { margin-bottom: 0.9rem; }
+.section-lead { color: var(--text-muted); max-width: 62ch; font-size: 1.1rem; margin-bottom: clamp(1.8rem, 4vw, 3rem); }
+.muted { color: var(--text-muted); }
+.accent-text { background: var(--gradient-text); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* ---------- Кнопки ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+  min-height: 52px; padding: 0.9rem 1.6rem;
+  border-radius: var(--radius-pill); font-weight: 600; text-align: center;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), background-color 0.25s var(--ease);
+}
+.btn svg { width: 20px; height: 20px; flex: none; }
+.btn--primary { background: var(--gradient); color: var(--on-accent); box-shadow: var(--shadow-sm); }
+.btn--primary:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.btn--ghost { border: 1.5px solid var(--border-strong); color: var(--text); }
+.btn--ghost:hover { border-color: var(--accent); color: var(--accent); }
+.btn--wide { width: 100%; }
+
+/* ---------- Шапка ---------- */
+.header {
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.header__row { display: flex; align-items: center; gap: 1.2rem; min-height: 68px; }
+.logo { font-family: var(--font-head); font-weight: 700; font-size: 1.25rem; letter-spacing: -0.01em; display: flex; align-items: center; gap: 0.5rem; min-height: 44px; }
+.logo svg { width: 26px; height: 26px; color: var(--accent); }
+.nav { display: flex; gap: 1.4rem; margin-left: auto; }
+.nav a { color: var(--text-muted); font-size: 0.98rem; transition: color 0.2s; }
+.nav a:hover { color: var(--text); }
+/* Пункт текущей страницы. aria-current проставляет сборщик собрать.py. */
+.nav a[aria-current="page"] { color: var(--text); font-weight: 600; }
+.header__phone { font-weight: 600; white-space: nowrap; }
+.burger { display: none; flex: none; width: 44px; height: 44px; margin-left: auto; align-items: center; justify-content: center; }
+.burger svg { width: 26px; height: 26px; }
+
+@media (max-width: 900px) {
+  .nav {
+    position: fixed; inset: 68px 0 auto 0; flex-direction: column; gap: 0;
+    background: var(--bg); border-bottom: 1px solid var(--border);
+    padding: 0.5rem var(--gutter) 1.5rem; margin: 0;
+    transform: translateY(-120%); transition: transform 0.35s var(--ease); box-shadow: var(--shadow);
+  }
+  .nav a { padding: 0.9rem 0; border-bottom: 1px solid var(--border); font-size: 1.05rem; }
+  /* Меню уезжает вверх, но его тень продолжает падать вниз — под шапкой
+     оставалась светлая полоса, будто меню не закрылось до конца. */
+  .nav { box-shadow: none; visibility: hidden; }
+  body.nav-open .nav { transform: translateY(0); visibility: visible; box-shadow: var(--shadow); }
+  body.nav-open { overflow: hidden; }
+  .burger { display: inline-flex; }
+  .header__phone { display: none; }
+}
+
+/* ---------- Подвал ---------- */
+.footer { background: var(--bg-soft); border-top: 1px solid var(--border); padding-block: clamp(2.5rem, 5vw, 4rem) 6rem; }
+.footer__grid { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.footer a:hover { color: var(--accent); }
+.footer__legal { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.9rem; display: flex; flex-wrap: wrap; gap: 0.4rem 2rem; align-items: center; }
+/* Ссылка в нижней строке — такая же цель для пальца, как кнопка: 44 px. */
+.footer__legal a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* ---------- Формы ---------- */
+.field { display: block; margin-bottom: 1rem; }
+.field > span { display: block; margin-bottom: 0.4rem; font-size: 0.95rem; color: var(--text-muted); }
+.input, .textarea, .select {
+  width: 100%; font: inherit; font-size: 16px; /* 16px — иначе iPhone приближает экран */
+  padding: 0.85rem 1rem; min-height: 52px;
+  color: var(--text); background: var(--bg-elevated);
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  transition: border-color 0.2s;
+}
+.input:focus, .textarea:focus, .select:focus { border-color: var(--accent); outline: none; }
+.textarea { min-height: 120px; resize: vertical; }
+.check { display: flex; gap: 0.6rem; align-items: flex-start; font-size: 0.92rem; color: var(--text-muted); margin: 1rem 0; }
+.check input { width: 20px; height: 20px; flex: none; margin-top: 2px; accent-color: var(--accent); }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.form__note { font-size: 0.9rem; color: var(--text-dim); }
+.form__msg { margin-top: 1rem; font-weight: 600; }
+.form__msg.is-ok { color: var(--ok); }
+.form__msg.is-err { color: var(--danger); }
+.is-invalid { border-color: var(--danger) !important; }
+
+/* ---------- Мелочи ---------- */
+.card {
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: clamp(1.2rem, 2.5vw, 1.8rem);
+  box-shadow: var(--shadow-sm);
+}
+.card__icon { width: 44px; height: 44px; color: var(--accent); margin-bottom: 1rem; }
+.badge { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.8rem; border-radius: var(--radius-pill); background: var(--surface); font-size: 0.85rem; font-weight: 600; }
+.skip-link { position: absolute; left: -9999px; }
+.skip-link:focus { left: 1rem; top: 1rem; z-index: 100; background: var(--bg); padding: 0.8rem 1.2rem; border-radius: var(--radius-sm); box-shadow: var(--shadow); }
+
+/* ---------- Уведомление о cookie (разметку создаёт js/cookie.js) ---------- */
+.cookie {
+  position: fixed; z-index: 1500;
+  left: var(--gutter); right: var(--gutter); bottom: var(--gutter);
+  max-width: 720px; margin-inline: auto;
+  display: flex; align-items: center; gap: 1.2rem 1.5rem; flex-wrap: wrap;
+  padding: 1.1rem 1.3rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+}
+.cookie.is-shown { opacity: 1; transform: none; }
+.cookie__text { flex: 1 1 320px; }
+.cookie__title { display: block; font-size: 0.98rem; margin-bottom: 0.3rem; font-family: var(--font-head); }
+.cookie__text p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+.cookie__text a { color: var(--accent-deep); text-decoration: underline; }
+.cookie__actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.cookie .btn { padding: 0.6rem 1.1rem; min-height: 44px; font-size: 0.85rem; }
+@media (max-width: 900px) { .cookie { bottom: 5.4rem; } }
+@media (max-width: 560px) { .cookie__actions { width: 100%; } .cookie .btn { flex: 1; } }

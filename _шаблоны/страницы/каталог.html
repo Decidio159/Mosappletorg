@@ -1,0 +1,156 @@
+<!-- страница
+заголовок: Каталог — {{название}}
+описание: iPhone, iPad, MacBook, Apple Watch, AirPods, камеры DJI и Insta360 в наличии в Москве. Цены, наличие, доставка и Trade-in.
+адрес: каталог.html
+-->
+<!-- вставить: голова -->
+<!-- вставить: шапка -->
+
+<main id="main">
+
+<section class="section">
+  <div class="container">
+    <p class="eyebrow" data-reveal>Каталог</p>
+    <h1 class="section-title" data-reveal>Что есть в наличии</h1>
+    <p class="section-lead" data-reveal>
+      Цены актуальны на сегодня, наличие меняется в течение дня — перед поездкой
+      напишите менеджеру
+      <a class="accent-text" href="{{телеграм_менеджер}}" rel="noopener" target="_blank">@appletorg_manager</a>,
+      он подтвердит за пару минут. Больше позиций — по запросу.
+    </p>
+
+    <button class="btn btn--primary facets__toggle" type="button" data-facets-toggle aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+      Фильтры
+    </button>
+
+    <!-- Фильтр и карточки собирает собрать-каталог.py из товары.json,
+         кусок перезаписывается целиком:
+             python собрать-каталог.py
+             python инструменты/собрать.py --проект .  -->
+    <!-- вставить: товары -->
+
+    <p class="muted" style="margin-top: 2rem; font-size: 0.92rem">
+      Нужной конфигурации нет в списке? Мы возим под заказ почти всё: другие объёмы
+      памяти, цвета, Dyson, аксессуары. Напишите — привезём.
+    </p>
+  </div>
+</section>
+
+<!-- вставить: форма -->
+
+</main>
+
+<!-- вставить: подвал -->
+<!-- вставить: корзина -->
+
+<script>
+  /* Фильтр каталога: цена «от/до» и галочки по типу, бренду и состоянию.
+     Внутри группы условия складываются («смартфоны ИЛИ планшеты»),
+     между группами — умножаются («смартфоны И Apple И б/у») — так это
+     работает во всех магазинах, к которым покупатель привык.
+     Запуск отложен на window.load: к этому моменту разметка уже собрана. */
+  (function () {
+    function завести() {
+      var корень = document.querySelector("[data-catalog]");
+      if (!корень) return;
+
+      var карточки = [].slice.call(корень.querySelectorAll(".catalog__card"));
+      var галочки = [].slice.call(корень.querySelectorAll("[data-facet]"));
+      var мин = корень.querySelector("[data-price-min]");
+      var макс = корень.querySelector("[data-price-max]");
+      var счётчик = корень.querySelector("[data-catalog-count]");
+      var пусто = корень.querySelector("[data-catalog-empty]");
+      var сброс = корень.querySelector("[data-facets-reset]");
+      var панель = корень.querySelector("[data-facets]");
+      var кнопка = document.querySelector("[data-facets-toggle]");
+
+      function выбрано(поле) {
+        return галочки.filter(function (г) {
+          return г.dataset.facet === поле && г.checked;
+        }).map(function (г) { return г.value; });
+      }
+
+      function число(поле) {
+        var v = parseInt(поле.value, 10);
+        return isNaN(v) ? null : v;
+      }
+
+      function слово(н) {
+        var сто = н % 100, десять = н % 10;
+        if (сто > 10 && сто < 20) return "товаров";
+        if (десять === 1) return "товар";
+        if (десять > 1 && десять < 5) return "товара";
+        return "товаров";
+      }
+
+      function пересчитать() {
+        var типы = выбрано("type"), бренды = выбрано("brand"), состояния = выбрано("state");
+        var от = число(мин), до = число(макс);
+        var видно = 0;
+
+        карточки.forEach(function (к) {
+          var цена = parseInt(к.dataset.price, 10);
+          var годится =
+            (!типы.length || типы.indexOf(к.dataset.type) > -1) &&
+            (!бренды.length || бренды.indexOf(к.dataset.brand) > -1) &&
+            (!состояния.length || состояния.indexOf(к.dataset.state) > -1) &&
+            (от === null || цена >= от) &&
+            (до === null || цена <= до);
+          к.hidden = !годится;
+          if (годится) видно++;
+        });
+
+        счётчик.textContent = видно + " " + слово(видно) + " из " + карточки.length;
+        пусто.hidden = видно > 0;
+      }
+
+      галочки.forEach(function (г) { г.addEventListener("change", пересчитать); });
+      [мин, макс].forEach(function (п) { п.addEventListener("input", пересчитать); });
+
+      сброс.addEventListener("click", function () {
+        галочки.forEach(function (г) { г.checked = false; });
+        мин.value = ""; макс.value = "";
+        пересчитать();
+      });
+
+      /* На телефоне панель выезжает слева поверх страницы. Затемнение
+         добавляем скриптом: в разметке ему делать нечего. */
+      if (кнопка) {
+        var шторка = document.createElement("div");
+        шторка.className = "facets__shade";
+        панель.appendChild(шторка);
+
+        function переключить_панель(открыть) {
+          панель.classList.toggle("is-open", открыть);
+          кнопка.setAttribute("aria-expanded", открыть ? "true" : "false");
+          document.body.style.overflow = открыть ? "hidden" : "";
+        }
+        кнопка.addEventListener("click", function () {
+          переключить_панель(!панель.classList.contains("is-open"));
+        });
+        шторка.addEventListener("click", function () { переключить_панель(false); });
+        document.addEventListener("keydown", function (е) {
+          if (е.key === "Escape") переключить_панель(false);
+        });
+        // выбрали фильтр — можно сразу смотреть результат
+        сброс.addEventListener("click", function () { переключить_панель(false); });
+      }
+
+      /* Ссылки с главной вида каталог.html#smartphones сразу ставят галочку. */
+      function из_адреса() {
+        var метка = decodeURIComponent(location.hash.replace("#", ""));
+        if (!метка) return;
+        var г = галочки.filter(function (г) { return г.value === метка; })[0];
+        if (г) { г.checked = true; пересчитать(); корень.scrollIntoView({ block: "start" }); }
+      }
+
+      пересчитать();
+      из_адреса();
+      window.addEventListener("hashchange", из_адреса);
+    }
+    window.addEventListener("load", завести);
+  })();
+</script>
+
+<!-- вставить: скрипты -->
