@@ -101,6 +101,16 @@
 
   сдвинуть(false);
   отметить();
+
+  /* На телефоне стрелки встают в один ряд с точками. Ширину ряда меряем
+     и отдаём в CSS: точек может стать больше или меньше, а раскладка
+     не должна зависеть от их числа. */
+  function померить_точки() {
+    var ряд = блок.querySelector(".banners__dots");
+    if (ряд) блок.style.setProperty("--dots-width", Math.round(ряд.getBoundingClientRect().width) + "px");
+  }
+  померить_точки();
+  window.addEventListener("resize", померить_точки);
   if (!спокойно) {
     setInterval(function () {
       if (document.hidden || Date.now() < пауза_до || блок.matches(":hover")) return;

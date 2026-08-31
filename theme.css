@@ -663,3 +663,44 @@ html, body { overscroll-behavior-x: none; }
   .lenta.is-lenta .lenta__arrow--prev { left: auto; right: 3.6rem; }
   .lenta.is-lenta .lenta__arrow--next { right: 0; }
 }
+
+/* ---------- Первый экран на телефоне: стрелки в ряд с точками ---------- */
+@media (max-width: 860px) {
+  /* Раньше стрелки просто прятались, и баннер нельзя было листать иначе
+     как свайпом. Ставим их по краям от точек — ширину ряда меряет
+     общее/js/баннеры.js и кладёт в --dots-width. */
+  /* 44 px — минимум, ниже которого палец промахивается. Кружок рисуем
+     меньше самой кнопки: визуально аккуратно, а нажимать удобно. */
+  .banners__arrow {
+    display: grid;
+    top: auto; bottom: -0.1rem; transform: none;
+    width: 44px; height: 44px;
+    background: none; border: 0; box-shadow: none;
+  }
+  .banners__arrow::before {
+    content: ""; position: absolute; width: 36px; height: 36px; border-radius: 50%;
+    background: var(--bg-elevated); border: 1px solid var(--border);
+  }
+  .banners__arrow svg { width: 19px; height: 19px; position: relative; }
+  .banners__arrow--prev { left: calc(50% - var(--dots-width, 220px) / 2 - 42px); right: auto; }
+  .banners__arrow--next { left: calc(50% + var(--dots-width, 220px) / 2 - 2px); right: auto; }
+}
+
+/* Кнопка «Фильтры» стоит в нижней панели рядом с корзиной */
+@media (max-width: 900px) {
+  .callbar .facets__toggle {
+    position: static; box-shadow: none; margin: 0;
+    flex: 0 0 auto; padding-inline: 1rem;
+  }
+  .callbar .facets__toggle svg { width: 18px; height: 18px; }
+}
+
+/* В нижнюю панель на каталоге добавляется третья кнопка — «Фильтры».
+   В скелете панель — сетка из двух колонок, поэтому третья кнопка уезжала
+   на вторую строку. Там, где она есть, делаем три колонки и ужимаем поля. */
+@media (max-width: 900px) {
+  .callbar:has(.facets__toggle) { grid-template-columns: auto 1fr auto; gap: 0.5rem; }
+  .callbar:has(.facets__toggle) .btn {
+    padding-inline: 0.85rem; font-size: 0.94rem; white-space: nowrap;
+  }
+}
