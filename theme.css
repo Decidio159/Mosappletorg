@@ -704,3 +704,15 @@ html, body { overscroll-behavior-x: none; }
     padding-inline: 0.85rem; font-size: 0.94rem; white-space: nowrap;
   }
 }
+
+/* На каталоге внизу нужна только кнопка фильтров — корзина и телефон
+   есть в шапке, а белая полоса под ними закрывала товары. */
+@media (max-width: 900px) {
+  .callbar:has(.facets__toggle) {
+    grid-template-columns: auto; justify-items: start;
+    background: none; border-top: 0; backdrop-filter: none;
+    padding-inline: var(--gutter); pointer-events: none;
+  }
+  .callbar:has(.facets__toggle) > *:not(.facets__toggle) { display: none; }
+  .callbar .facets__toggle { pointer-events: auto; box-shadow: var(--shadow); }
+}
