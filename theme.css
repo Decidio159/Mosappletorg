@@ -347,7 +347,9 @@
     display: flex;
     gap: 0.8rem;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    /* Прилипания scroll-snap здесь нет намеренно: его точки не совпадали
+       с шагом ленты и тянули карточку обратно, из-за чего перестановка
+       не срабатывала. Выравнивание делает скрипт — он же и закольцовывает. */
     scroll-behavior: smooth;
     scrollbar-width: none;
     /* карточки должны доезжать до края экрана, а не упираться в поле контейнера */
@@ -356,10 +358,7 @@
     padding-block: 0.3rem;
   }
   .lenta.is-lenta .lenta__track::-webkit-scrollbar { display: none; }
-  .lenta.is-lenta .lenta__track > * {
-    flex: 0 0 78%;
-    scroll-snap-align: start;
-  }
+  .lenta.is-lenta .lenta__track > * { flex: 0 0 78%; }
 
   .lenta.is-lenta .lenta__arrow {
     display: grid; place-items: center;
@@ -589,14 +588,11 @@
 /* Лента: одна карточка по центру, соседние за краем экрана. */
 @media (max-width: 720px) {
   .lenta.is-lenta .lenta__track {
-    scroll-snap-type: x mandatory;
-    /* поле по бокам делает карточку центрированной, а не прижатой к краю */
     padding-inline: calc(var(--gutter) + 0.4rem);
     margin-inline: calc(var(--gutter) * -1);
   }
   .lenta.is-lenta .lenta__track > * {
     flex: 0 0 calc(100% - var(--gutter) * 2 - 0.8rem);
-    scroll-snap-align: center;
   }
 }
 
